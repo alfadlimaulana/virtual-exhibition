@@ -1,7 +1,21 @@
-import './bootstrap';
+import "./bootstrap";
+import Alpine from "alpinejs";
 
-import Alpine from 'alpinejs';
+Alpine.data("navState", () => ({
+    navTheme: "",
+    showMobileNav: false,
 
-window.Alpine = Alpine;
+    initState() {
+        if (window.pageYOffset > 0) {
+            this.navTheme = "nav-dark";
+        } else {
+            this.navTheme = "nav-light";
+        }
+    },
+
+    toggleMobileNav() {
+        this.showMobileNav = !this.showMobileNav
+    }
+}));
 
 Alpine.start();
