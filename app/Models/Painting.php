@@ -16,6 +16,10 @@ class Painting extends Model
         'id',
     ];
 
+    protected $attibutes = [
+        'status' => 'on review',
+    ];
+
     // relations
     public function user(): BelongsTo
     {

@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('painting_categories', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('phone')->nullable();
-            $table->string('email')->unique();
-            $table->string('role');
-            $table->string('password');
-            $table->rememberToken();
+
+            //foreign key
+            $table->foreignUuid('painting_id');              $table->foreign('painting_id')->references('id')->on('paintings');
+            $table->foreignUuid('category_id');              $table->foreign('category_id')->references('id')->on('categories');
+            
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('painting_categories');
     }
 };

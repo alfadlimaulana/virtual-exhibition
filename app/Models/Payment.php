@@ -15,6 +15,10 @@ class Payment extends Model
         'id',
     ];
 
+    protected $attibutes = [
+        'status' => 'unpaid',
+    ];
+
     // relations 
     public function user(): BelongsTo
     {

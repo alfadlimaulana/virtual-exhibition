@@ -4,19 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Category extends Model
+class LikedPainting extends Model
 {
     use HasFactory, HasUuids;
+
     protected $guarded = [
         'id',
     ];
 
     // relations
-    public function paintingCategory(): HasMany
+    public function user(): BelongsTo
     {
-        return $this->hasMany(LikedPaintings::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function painting(): BelongsTo
+    {
+        return $this->belongsTo(Painting::class);
     }
 }

@@ -15,6 +15,10 @@ class Subscription extends Model
         'id',
     ];
 
+    protected $attibutes = [
+        'role' => 'pengunjung',
+    ];
+
     // relations
     public function user(): BelongsTo
     {
