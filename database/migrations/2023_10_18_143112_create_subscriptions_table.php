@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->dateTime('expired_date');
+            $table->dateTime('expired_date')->nullable();
             $table->string('status');
 
             //foreign key

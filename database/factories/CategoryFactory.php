@@ -17,7 +17,9 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'id' => fake()->uuid(),
+            'name' => fake()->randomElement(["realism", "photorealism", "expressionism", "impressionism", "abstract", "surrealism", "pop art"]),
+            'description' => fake()->text(),
         ];
     }
 }

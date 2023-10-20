@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,13 @@ class PaintingFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'id' => fake()->uuid(),
+            'year' => fake()->year(),
+            'title' => fake()->words(2, true),
+            'description' => fake()->text(),
+            'material' => fake()->randomElement(['acrylic', 'oil', 'watercolor', 'gouache', 'encaustic']),
+            'dimension' =>  fake()->numberBetween(50,150) . ' X ' . fake()->numberBetween(50,150),
+            'status' => fake()->randomElement(['on display', 'on review']),
         ];
     }
 }

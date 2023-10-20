@@ -17,7 +17,8 @@ class PaintingImageFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'id' => fake()->uuid(),
+            'image' => 'img/painting-images/1.jpg',
         ];
     }
 }
