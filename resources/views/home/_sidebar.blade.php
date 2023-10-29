@@ -1,4 +1,4 @@
-<aside class="p-6 bg-gray-400 sm:rounded-md lg:w-1/3 xl:w-full xl:max-w-sm lg:h-fit sticky top-24">
+<aside class="p-6 bg-gray-400 sm:rounded-md lg:w-1/3 xl:w-full xl:max-w-sm lg:h-fit lg:sticky top-24">
     <div class="mb-4 lg:mb-6">
         <x-forms.label for="first_name">Cari Lukisan</x-forms.label>
         <div class="relative">
@@ -12,7 +12,7 @@
     </div>
     <div class="mb-4 lg:mb-6">
         <x-forms.label>Saring Berdasarkan:</x-forms.label>
-        <div class="flex lg:flex-col gap-2">
+        <div class="flex gap-2 lg:flex-col">
             <div class="flex items-center mr-4">
                 <input id="filter-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
                 <x-forms.label class="!mb-0 ml-2" for="filter-checkbox">Filter 1</x-forms.label>
@@ -23,5 +23,5 @@
             </div>
         </div>
     </div>
-    <x-button type="submit" class="h-full px-6 tracking-normal text-white capitalize rounded-l-none bg-gray-500 hover:bg-gray-600">Search</x-button>
+    <x-button type="submit" class="h-full px-6 tracking-normal text-white capitalize bg-gray-500 rounded-l-none hover:bg-gray-600">Search</x-button>
 </aside>
