@@ -13,9 +13,9 @@
         <div class="grid gap-4 max-sm:container sm:grid-cols-2 md:max-lg:grid-cols-3 xl:grid-cols-3">
             @foreach ($paintings as $painting)
             <div class="border border-gray-900 rounded-md">
-                <img src="{{asset($painting->paintingImages[1]->image)}}" alt="" class="object-cover object-center w-full aspect-square">
+                <img src="{{ asset($painting->paintingImages[1]->image) }}" alt="" class="object-cover object-center w-full aspect-square">
                 <div class="p-4">
-                    <h5 class="text-2xl">Card Title</h5>
+                    <h5 class="text-2xl">{{ $painting->title }}</h5>
                     <p>By: Artist</p>
                 </div>
             </div>
