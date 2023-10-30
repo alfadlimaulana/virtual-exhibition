@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,6 +21,31 @@ class Painting extends Model
     protected $attibutes = [
         'status' => 'on review',
     ];
+
+    //scope
+    public function scopeFilter(Builder $query, array $request): void
+    {
+        // dd($request['category']);
+        $query->when($request['keyword'] ?? false, function ($query, $keyword) {
+            return $query->where('title', 'LIKE', '%'.$keyword.'%')
+                ->orWhereHas('user', function ($query) use ($keyword) {
+                    $query->where('name', 'LIKE', '%'.$keyword.'%');
+                }
+            );
+        });
+
+        $query->when($request['category'] ?? false, function ($query, $category) {
+            return $query->whereHas('paintingCategories', function ($query) use ($category) {
+                $query->whereHas('category', function ($query) use ($category) {
+                    $query->whereIn('name', $category);
+                });
+            });
+        });
+
+        $query->when($request['material'] ?? false, function ($query, $material) {
+            return $query->whereIn('material', $material);
+        });
+    }
 
     // relations
     public function user(): BelongsTo

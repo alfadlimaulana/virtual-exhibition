@@ -8,19 +8,72 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                     </svg>
                 </div>
-                <input type="text" name="keyword" id="keyword" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search">
+                <input type="text" value="{{ request('keyword') }}" name="keyword" id="keyword" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search">
             </div>
         </div>
         <div class="mb-4 lg:mb-6">
-            <x-forms.label>Saring Berdasarkan:</x-forms.label>
-            <div class="flex gap-2 lg:flex-col">
+            <x-forms.label>Category</x-forms.label>
+            <div class="flex flex-wrap gap-2 lg:flex-col capitalize">
                 <div class="flex items-center mr-4">
-                    <input id="filter-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                    <x-forms.label class="!mb-0 ml-2" for="filter-checkbox">Filter 1</x-forms.label>
+                    <x-forms.checkbox id="realism" name="category[]" value="realism" :checked="in_array('realism', (request('category') ?? []))" />
+                    <x-forms.label class="!mb-0 ml-2" for="realism">realism</x-forms.label>
                 </div>
                 <div class="flex items-center mr-4">
-                    <input id="filter-2-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                    <x-forms.label class="!mb-0 ml-2" for="filter-2-checkbox">Filter 2</x-forms.label>
+                    <x-forms.checkbox id="photorealism" name="category[]" value="photorealism" :checked="in_array('photorealism', (request('category') ?? []))" />
+                    <x-forms.label class="!mb-0 ml-2" for="photorealism">photorealism</x-forms.label>
+                </div>
+                <div class="flex items-center mr-4">
+                    <x-forms.checkbox id="expressionism" name="category[]" value="expressionism" :checked="in_array('expressionism', (request('category') ?? []))" />
+                    <x-forms.label class="!mb-0 ml-2" for="expressionism">expressionism</x-forms.label>
+                </div>
+                <div class="flex items-center mr-4">
+                    <x-forms.checkbox id="impressionism" name="category[]" value="impressionism" :checked="in_array('impressionism', (request('category') ?? []))" />
+                    <x-forms.label class="!mb-0 ml-2" for="impressionism">impressionism</x-forms.label>
+                </div>
+                <div class="flex items-center mr-4">
+                    <x-forms.checkbox id="abstract" name="category[]" value="abstract" :checked="in_array('abstract', (request('category') ?? []))" />
+                    <x-forms.label class="!mb-0 ml-2" for="abstract">abstract</x-forms.label>
+                </div>
+                <div class="flex items-center mr-4">
+                    <x-forms.checkbox id="surrealism" name="category[]" value="surrealism" :checked="in_array('surrealism', (request('category') ?? []))" />
+                    <x-forms.label class="!mb-0 ml-2" for="surrealism">surrealism</x-forms.label>
+                </div>
+                <div class="flex items-center mr-4">
+                    <x-forms.checkbox id="pop art" name="category[]" value="pop art" :checked="in_array('pop art', (request('category') ?? []))" />
+                    <x-forms.label class="!mb-0 ml-2" for="pop art">pop art</x-forms.label>
+                </div>
+                <div class="flex items-center mr-4">
+                    <x-forms.checkbox id="other" name="category[]" value="other" :checked="in_array('other', (request('category') ?? []))"/>
+                    <x-forms.label class="!mb-0 ml-2" for="other">other</x-forms.label>
+                </div>
+            </div>
+        </div>
+        <div class="mb-4 lg:mb-6">
+            <x-forms.label>Material</x-forms.label>
+            <div class="flex flex-wrap gap-2 lg:flex-col capitalize">
+                <div class="flex items-center mr-4">
+                    <x-forms.checkbox id="acrylic" name="material[]" value="acrylic" :checked="in_array('acrylic', (request('material') ?? []))" />
+                    <x-forms.label class="!mb-0 ml-2" for="acrylic">acrylic</x-forms.label>
+                </div>
+                <div class="flex items-center mr-4">
+                    <x-forms.checkbox id="oil" name="material[]" value="oil" :checked="in_array('oil', (request('material') ?? []))" />
+                    <x-forms.label class="!mb-0 ml-2" for="oil">oil</x-forms.label>
+                </div>
+                <div class="flex items-center mr-4">
+                    <x-forms.checkbox id="watercolor" name="material[]" value="watercolor" :checked="in_array('watercolor', (request('material') ?? []))"/>
+                    <x-forms.label class="!mb-0 ml-2" for="watercolor">watercolor</x-forms.label>
+                </div>
+                <div class="flex items-center mr-4">
+                    <x-forms.checkbox id="gouache" name="material[]" value="gouache" :checked="in_array('gouache', (request('material') ?? []))"/>
+                    <x-forms.label class="!mb-0 ml-2" for="gouache">gouache</x-forms.label>
+                </div>
+                <div class="flex items-center mr-4">
+                    <x-forms.checkbox id="encaustic" name="material[]" value="encaustic" :checked="in_array('encaustic', (request('material') ?? []))"/>
+                    <x-forms.label class="!mb-0 ml-2" for="encaustic">encaustic</x-forms.label>
+                </div>
+                <div class="flex items-center mr-4">
+                    <x-forms.checkbox id="other" name="material[]" value="other" :checked="in_array('other', (request('material') ?? []))"/>
+                    <x-forms.label class="!mb-0 ml-2" for="other">other</x-forms.label>
                 </div>
             </div>
         </div>

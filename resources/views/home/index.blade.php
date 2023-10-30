@@ -10,18 +10,21 @@
 <div class="relative gap-4 sm:container sm:py-10 lg:flex">
     @include('home._sidebar')
     <section class="max-lg:py-10 lg:w-2/3 xl:w-full">
+        @if ($paintings->count())
         <div class="grid gap-4 max-sm:container sm:grid-cols-2 md:max-lg:grid-cols-3 xl:grid-cols-3">
             @foreach ($paintings as $painting)
             <div class="border border-gray-900 rounded-md">
                 <img src="{{ asset($painting->paintingImages[1]->image) }}" alt="" class="object-cover object-center w-full aspect-square">
                 <div class="p-4">
                     <h5 class="text-2xl">{{ $painting->title }}</h5>
-                    <p>By: Artist</p>
+                    <p>By: {{ $painting->user->name }}</p>
                 </div>
             </div>
             @endforeach
         </div>
-
+        @else
+            <div class="text-xl text-gray-500 h-full grid place-items-center">No paintings found</div>
+        @endif
         {{ $paintings->links() }}
     </section>
 </div>
