@@ -15,11 +15,11 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen flex flex-col bg-gray-100">
+        <div class="flex flex-col min-h-screen bg-gray-50">
             @include('layouts._navbar')
 
             <!-- Page Content -->
-            <main class="flex-grow">
+            <main class="grid flex-grow place-items-center">
                 @yield('content')
             </main>
 

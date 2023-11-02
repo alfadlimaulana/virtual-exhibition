@@ -23,19 +23,11 @@
                     <div class="flex space-x-4 text-gray-600 group-[.nav-dark]:text-white">
                         <a href=""
                             class="px-3 py-2 text-base font-medium transition duration-300 ease-out hover:text-gray-800">
-                            Subscribe
+                            Beranda
                         </a>
                         <a href=""
                             class="px-3 py-2 text-base font-medium transition duration-300 ease-out hover:text-gray-800">
-                            Portfolio
-                        </a>
-                        <a href=""
-                            class="px-3 py-2 text-base font-medium transition duration-300 ease-out hover:text-gray-800">
-                            Tema
-                        </a>
-                        <a href=""
-                            class="px-3 py-2 text-base font-medium transition duration-300 ease-out hover:text-gray-800">
-                            Fitur
+                            Pricing
                         </a>
                     </div>
                 </div>
@@ -79,12 +71,12 @@
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                 class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-500 hover:text-white"
                                 role="menuitem">
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;{{ __('Logout') }}
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;Logout
                             </a>
 
-                            <form id="logout-form" action="" method="POST"
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                 style="display: none;">
-                                {{ csrf_field() }}
+                                @csrf
                             </form>
                     </div>
                     @endauth
@@ -115,7 +107,7 @@
             @guest
                 <hr>
                 <a href="{{ route('login') }}"
-                    class="block px-3 py-2 mt-2 text-base font-medium rounded-md text-gray-500 bg-gray-100">
+                    class="block px-3 py-2 mt-2 text-base font-medium text-gray-500 bg-gray-100 rounded-md">
                     <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-6 h-6" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round"
