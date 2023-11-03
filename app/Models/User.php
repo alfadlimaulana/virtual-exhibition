@@ -24,7 +24,7 @@ class User extends Authenticatable
         'id',
     ];
 
-    protected $attibutes = [
+    protected $attributes = [
         'role' => 'pengunjung',
     ];
 

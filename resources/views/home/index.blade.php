@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="relative h-96 text-white bg-header bg-[rgba(0,0,0,0.4)] bg-blend-overlay flex items-center">
+<section class="w-full relative h-96 text-white bg-header bg-[rgba(0,0,0,0.4)] bg-blend-overlay flex items-center">
     <div class="container text-center">
         <h1 class="mb-4">Lorem Ipsum</h1>
         <p>Lorem ipsum dolor sit amet consectetur. Sit posuere dictumst gravida sed. Et volutpat dolor gravida mattis vitae. Elit venenatis nibh in sed nisl. Nunc nunc nunc fringilla ornare egestas. Magna purus eget et enim phasellus in nullam. Et morbi convallis vitae ipsum. Quis vulputate augue vivamus risus.</p>

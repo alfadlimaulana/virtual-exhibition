@@ -11,7 +11,7 @@ class LoginController extends Controller
     public function create(Request $request)
     {
         return view('auth.login', [
-            "title" => "Home",
+            "title" => "Login",
         ]);
     }
 

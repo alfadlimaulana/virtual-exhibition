@@ -15,8 +15,9 @@ class Subscription extends Model
         'id',
     ];
 
-    protected $attibutes = [
-        'role' => 'pengunjung',
+    protected $attributes = [
+        'expired_date' => null,
+        'status' => 'none',
     ];
 
     // relations

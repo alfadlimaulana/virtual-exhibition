@@ -20,17 +20,17 @@
         <form method="POST" action="login" class="mb-4">
             @csrf
         
-            <div class="flex flex-col gap-1.5 mb-6">
+            <div class="flex flex-col gap-2 mb-6">
                 <x-forms.input id="email" class="mt-1" type="email" name="email" :value="old('email')" placeholder="Email" required />
                 <x-forms.input id="password" class="max-w-xs" type="password" name="password" placeholder="Password"/>
             </div>
         
             <x-button type="submit" class="w-full text-white bg-gray-500 hover:bg-gray-600">
-                Login
+                Masuk
             </x-button>
         </form>
         
-        <p>Belum punya akun? <a href="" class="text-gray-700 underline hover:text-gray-800">Daftar disini.</a></p>
+        <p>Belum punya akun? <a href="{{ route('register') }}" class="text-gray-700 underline hover:text-gray-800">Daftar disini.</a></p>
     </div>
 </div>
 @endsection
