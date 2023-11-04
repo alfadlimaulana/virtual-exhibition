@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/{painting}', [PageController::class, 'detail'])->name('detail');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [LoginController::class, 'create'])->name('login');

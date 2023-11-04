@@ -35,11 +35,7 @@ class Painting extends Model
         });
 
         $query->when($request['category'] ?? false, function ($query, $category) {
-            return $query->whereHas('paintingCategories', function ($query) use ($category) {
-                $query->whereHas('category', function ($query) use ($category) {
-                    $query->whereIn('name', $category);
-                });
-            });
+            return $query->whereIn('category', $category);
         });
 
         $query->when($request['material'] ?? false, function ($query, $material) {
@@ -61,10 +57,5 @@ class Painting extends Model
     public function paintingImages(): HasMany
     {
         return $this->hasMany(PaintingImage::class);
-    }
-
-    public function paintingCategories(): HasMany
-    {
-        return $this->hasMany(PaintingCategory::class);
     }
 }

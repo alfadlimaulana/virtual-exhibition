@@ -22,4 +22,12 @@ class PageController extends Controller
             "paintings" => $paintings,
         ]);
     }
+
+    public function detail(Painting $painting)
+    {
+        return view('detail', [
+            "title" => "Painting Detail",
+            "painting" => $painting,
+        ]);
+    }
 }
