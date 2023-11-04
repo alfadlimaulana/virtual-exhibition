@@ -1,4 +1,4 @@
-<nav x-init="initState" @scroll.window="initState" x-data="navState" id="main-nav" :class="navTheme" class="sticky top-0 left-0 right-0 z-50 bg-gray-200">
+<nav @scroll.window="initState" id="main-nav" class="sticky top-0 left-0 right-0 z-50 bg-gray-200">
     <div id="nav" class="container sticky top-0 left-0 w-full py-2 mx-auto">
         <div class="relative flex items-center justify-between h-16">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -112,30 +112,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                     </svg>
-                    <span class="mx-1">{{ __('Login') }}</span>
+                    <span class="mx-1">Login</span>
                 </a>
             @endauth
         </div>
     </div>
 </nav>
-
-@push('after-javascript')
-    <script>
-        // const mainNav = document.getElementById("main-nav");
-        // const nav = document.getElementById("nav");
-
-        // document.addEventListener("scroll", () => {
-        //     if (window.pageYOffset > 0) {
-        //         nav.classList.add("nav-dark");
-        //         nav.classList.remove("nav-light");
-
-        //         mainNav.classList.add('bg-gray-500');
-        //     } else {
-        //         nav.classList.remove("nav-dark");
-        //         nav.classList.add("nav-light");
-
-        //         mainNav.classList.remove('bg-gray-500');
-        //     }
-        // });
-    </script>
-@endpush

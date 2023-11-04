@@ -7,9 +7,10 @@
 
         <title>Art Exhibition | {{ $title }}</title>
 
-        <!-- Fonts -->
+        <!-- Fonts & icons -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -25,5 +26,7 @@
 
             @include('layouts._footer')
         </div>
+
+        @stack('script')
     </body>
 </html>
