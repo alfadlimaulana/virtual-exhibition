@@ -26,9 +26,18 @@ class LikedPaintingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
-        //
+        $liked_painting = LikedPainting::create([
+            'user_id' => auth()->user()->id,
+            'painting_id' => $id
+        ]);
+
+        if(!$liked_painting) {
+            return back()->withErrors(['failed' => 'Gagal menyukai lukisan']);
+        }
+        
+        return back();
     }
 
     /**
@@ -58,8 +67,15 @@ class LikedPaintingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(LikedPainting $likedPainting)
+    public function destroy(string $id)
     {
-        //
+        $liked_painting = LikedPainting::where('user_id', '=', auth()->user()->id)->where('painting_id', '=', $id)->delete();
+        
+        if(!$liked_painting) {
+            return back()->withErrors(['failed' => 'Gagal berhenti menyukai lukisan']);
+        }
+        
+        return back();
+
     }
 }

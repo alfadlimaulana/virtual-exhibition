@@ -1,9 +1,9 @@
-<nav @scroll.window="initState" id="main-nav" class="sticky top-0 left-0 right-0 z-50 bg-gray-200">
+<nav x-data="navState" @scroll.window="initState" id="main-nav" class="sticky top-0 left-0 right-0 z-50 bg-gray-200">
     <div id="nav" class="container sticky top-0 left-0 w-full py-2 mx-auto">
         <div class="relative flex items-center justify-between h-16">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 <button @click="toggleMobileNav()" type="button"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 border border-gray-500 active:text-white active:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                    class="inline-flex items-center justify-center p-2 text-gray-500 border border-gray-500 rounded-md active:text-white active:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                     aria-controls="mobile-menu" aria-expanded="false">
                     <span class="sr-only">{{ __('Open main menu') }}</span>
                     <svg class="block w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <div class="text-gray-600 relative ml-3" x-data="{ isUserMenuOpen: false }">
+                <div class="relative ml-3 text-gray-600" x-data="{ isUserMenuOpen: false }">
                     <div class="flex flex-row gap-2">
                         @guest
                         <x-button-a href="{{ route('login') }}"
@@ -118,3 +118,24 @@
         </div>
     </div>
 </nav>
+
+@push('script')
+<script>
+navState = () => ({
+    navTheme: "",
+    showMobileNav: false,
+
+    initState() {
+        if (window.pageYOffset > 0) {
+            this.navTheme = "nav-dark";
+        } else {
+            this.navTheme = "nav-light";
+        }
+    },
+
+    toggleMobileNav() {
+        this.showMobileNav = !this.showMobileNav
+    }
+})
+</script>
+@endpush

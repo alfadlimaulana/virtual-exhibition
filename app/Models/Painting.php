@@ -51,7 +51,7 @@ class Painting extends Model
 
     public function likedPaintings(): HasMany
     {
-        return $this->hasMany(LikedPaintings::class);
+        return $this->hasMany(LikedPainting::class);
     }
 
     public function paintingImages(): HasMany
