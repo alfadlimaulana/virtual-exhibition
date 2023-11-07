@@ -11,9 +11,15 @@
                 <input type="text" value="{{ request('keyword') }}" name="keyword" id="keyword" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search">
             </div>
         </div>
+        @auth
+        <div class="flex items-center mb-4 mr-4 lg:mb-6 ">
+            <x-forms.checkbox id="liked" name="liked" :checked="request('liked') == 'on'" />
+            <x-forms.label class="!mb-0 ml-2" for="liked">Liked by You</x-forms.label>
+        </div>
+        @endauth
         <div class="mb-4 lg:mb-6">
             <x-forms.label>Category</x-forms.label>
-            <div class="flex flex-wrap gap-2 lg:flex-col capitalize">
+            <div class="flex flex-wrap gap-2 capitalize lg:flex-col">
                 <div class="flex items-center mr-4">
                     <x-forms.checkbox id="realism" name="category[]" value="realism" :checked="in_array('realism', (request('category') ?? []))" />
                     <x-forms.label class="!mb-0 ml-2" for="realism">realism</x-forms.label>
@@ -50,7 +56,7 @@
         </div>
         <div class="mb-4 lg:mb-6">
             <x-forms.label>Material</x-forms.label>
-            <div class="flex flex-wrap gap-2 lg:flex-col capitalize">
+            <div class="flex flex-wrap gap-2 capitalize lg:flex-col">
                 <div class="flex items-center mr-4">
                     <x-forms.checkbox id="acrylic" name="material[]" value="acrylic" :checked="in_array('acrylic', (request('material') ?? []))" />
                     <x-forms.label class="!mb-0 ml-2" for="acrylic">acrylic</x-forms.label>

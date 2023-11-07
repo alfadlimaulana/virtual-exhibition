@@ -34,6 +34,12 @@ class Painting extends Model
             );
         });
 
+        $query->when($request['liked'] ?? false, function ($query) {
+            return $query->whereHas('likedPaintings', function ($query) {
+                $query->where('user_id', '=', auth()->user()->id);
+            });
+        });
+
         $query->when($request['category'] ?? false, function ($query, $category) {
             return $query->whereIn('category', $category);
         });

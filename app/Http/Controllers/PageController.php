@@ -13,6 +13,7 @@ class PageController extends Controller
         $paintings->appends(
             [
                 'keyword' => $request->query('keyword') ?? null,
+                'liked' => $request->query('liked') ?? null,
                 'category' => $request->query('category') ?? null,
                 'material' => $request->query('material') ?? null,
             ]);
