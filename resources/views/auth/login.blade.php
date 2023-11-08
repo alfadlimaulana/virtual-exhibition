@@ -2,7 +2,7 @@
 
 @section('content')    
 <!-- Session Status -->
-<div class="flex items-center w-full max-w-2xl p-8 border border-black rounded-md aspect-video">
+<div class="flex items-center w-full max-w-2xl p-8 md:border border-black rounded-md aspect-video">
     <div class="w-full max-w-xs mx-auto text-center">
         <h4 class="mb-6">Masuk</h4>
         

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex items-center w-full max-w-2xl p-8 border border-black rounded-md aspect-video">
+<div class="flex items-center w-full max-w-2xl p-8 md:border border-black rounded-md aspect-video">
     <div class="w-full max-w-xs mx-auto">
         <h4 class="mb-6  text-center">Daftar</h4>
         
