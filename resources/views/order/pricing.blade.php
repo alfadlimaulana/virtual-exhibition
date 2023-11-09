@@ -19,27 +19,28 @@
                         <h2 class="mb-4">Subscription</h2>
                         <p>Hanya dengan <strong>Rp50.000/Bulan</strong> dapatkan lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique ea rerum distinctio sed sapiente iste eos expedita quidem tenetur necessitatibus iure aliquid molestiae quasi accusantium maxime, excepturi fugit, est voluptatibus.</p>
                     </div>
-                    <form action="" method="POST">
+                    <form action="{{ route('checkout') }}" method="POST">
+                        @csrf
                         <table class="mb-6">
                             <tr>
                                 <td class="px-2 py-1">
-                                    <x-forms.label class="!mb-0" for="durasi">Durasi</x-forms.label>
+                                    <x-forms.label class="!mb-0" for="duration">Durasi</x-forms.label>
                                 </td>
                                 <td class="px-2 py-1">:</td>
                                 <td class="flex gap-2 px-2 py-1 items-center">
-                                    <x-forms.input x-model="durasi" id="durasi" name="durasi" type="number" min="1" max="24" class="!w-16 h-8"/>
+                                    <x-forms.input x-model="duration" id="duration" name="duration" type="number" min="1" max="24" class="!w-16 h-8"/>
                                     <span>Bulan</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="px-2 py-1">Berakhir Pada</td>
                                 <td class="px-2 py-1">:</td>
-                                <td class="px-2 py-1" x-text="setExpired(durasi)"></td>
+                                <td class="px-2 py-1" x-text="setExpired(duration)"></td>
                             </tr>
                             <tr>
                                 <td class="px-2 py-1">Total</td>
                                 <td class="px-2 py-1">:</td>
-                                <td class="px-2 py-1" x-text="setTotal(durasi)"></td>
+                                <td class="px-2 py-1" x-text="setTotal(duration)"></td>
                             </tr>
                         </table>
                         <x-button type="submit" class="max-md:w-full py-2.5 bg-gray-500 text-white">Bayar Sekarang</x-button>
@@ -54,21 +55,21 @@
 <script>
     const form = () => { 
         return {
-            durasi: 1,
+            duration: 1,
             total: 50000,
             expiredDate: 0,
-            setExpired(durasi) {
+            setExpired(duration) {
                 const currentDate = new Date();
-                currentDate.setMonth(currentDate.getMonth() + parseInt(this.durasi));
+                currentDate.setMonth(currentDate.getMonth() + parseInt(this.duration));
                 this.expiredDate = currentDate.toISOString()
                 return currentDate.toISOString().substring(0, 10);
             },
-            setTotal(durasi) {
-                this.total = 50000*this.durasi;
+            setTotal(duration) {
+                this.total = 50000*this.duration;
                 let IDRFormat = new Intl.NumberFormat('en-ID', {
                     style: 'currency',
                     currency: 'IDR',
-                }).format(50000*this.durasi);
+                }).format(50000*this.duration);
                 return IDRFormat;
             }
         };

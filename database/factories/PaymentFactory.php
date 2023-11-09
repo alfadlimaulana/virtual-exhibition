@@ -19,6 +19,7 @@ class PaymentFactory extends Factory
     {
         return [
             'id' => fake()->uuid(),
+            'qty' => fake()->numberBetween(0,5),
             'total' => fake()->randomFloat(3,100000,300000),
             'payment_date' => fake()->randomElement([null, Carbon::parse($this->faker->dateTimeBetween('now', '+2 weeks'))->format('Y-m-d H:i:s')]),
             'method' => 'bca',

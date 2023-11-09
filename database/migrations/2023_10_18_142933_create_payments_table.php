@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->integer('qty');
             $table->float('total');
             $table->dateTime('payment_date')->nullable();
-            $table->string('method');
+            $table->string('method')->nullable();
             $table->string('status');
 
             //foreign key

@@ -19,6 +19,7 @@ use App\Http\Controllers\LikedPaintingController;
 */
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/detail/{painting}', [PageController::class, 'detail'])->name('detail');
+Route::get('/pricing', [PaymentController::class, 'create'])->name('pricing');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
@@ -28,7 +29,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/pricing', [PaymentController::class, 'create'])->name('pricing');
+    Route::post('/checkout', [PaymentController::class, 'store'])->name('checkout');
+    Route::post('/midtrans-callback', [PaymentController::class, 'update'])->name('callback');
     Route::post('/like/{id}', [LikedPaintingController::class, 'store'])->name('like');
     Route::post('/unlike/{id}', [LikedPaintingController::class, 'destroy'])->name('unlike');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');

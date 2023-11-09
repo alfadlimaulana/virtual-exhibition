@@ -26,7 +26,7 @@
                             Beranda
                         </a>
                         <a href="{{ route('pricing') }}"
-                            class="px-3 py-2 text-base font-medium transition duration-300 ease-out hover:text-black">
+                            class="px-3 py-2 text-base font-medium transition duration-300 ease-out hover:text-black {{ request()->routeIs('pricing') ?  'text-black' : '' }}">
                             Pricing
                         </a>
                     </div>
