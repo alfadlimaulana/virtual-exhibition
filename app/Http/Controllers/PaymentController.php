@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Subscription;
 
 class PaymentController extends Controller
 {
