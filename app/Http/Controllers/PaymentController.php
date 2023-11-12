@@ -113,7 +113,7 @@ class PaymentController extends Controller
                 
                     $subscription = Subscription::firstWhere('user_id', auth()->user()->id);
                     $subscription->update([
-                        'expired_date' => Carbon::now()->addMonths($payment->qty)->format('Y-m-d H:i:s')
+                        'expired_date' => Carbon::now()->addMonths($payment->quantity)->format('Y-m-d H:i:s')
                     ]);
                 }
             }
