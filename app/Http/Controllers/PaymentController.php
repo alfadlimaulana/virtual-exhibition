@@ -111,9 +111,8 @@ class PaymentController extends Controller
                         'method' => $request->payment_type,
                         'status' => 'paid'
                     ]);
-                
-                    $subscription = Subscription::firstWhere('user_id', auth()->user()->id);
-                    $subscription->update([
+
+                    $payment->user->subscription->update([
                         'expired_date' => Carbon::now()->addMonths($payment->quantity)->format('Y-m-d H:i:s')
                     ]);
                 }
