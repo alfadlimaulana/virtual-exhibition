@@ -53,7 +53,7 @@
                             <tr>
                                 <td class="pl-0 px-2 py-1">Durasi</td>
                                 <td class="px-2 py-1">:</td>
-                                <td class="px-2 py-1">{{ $payment->qty }}</td>
+                                <td class="px-2 py-1">{{ $payment->quantity }}</td>
                             </tr>
                             <tr>
                                 <td class="pl-0 px-2 py-1">Berakhir Pada</td>
