@@ -31,39 +31,50 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        $duration = $request->input('duration');
-        $payment = Payment::create([
-            'qty' => $duration,
-            'total' => $duration * 50000,
-            'status' => 'unpaid',
-            'user_id' => auth()->user()->id
-        ]);
+        try {
+            $duration = $request->input('duration');
 
-        // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = config('midtrans.server_key');
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
-        // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
+            DB::beginTransaction();
 
-        $params = array(
-            'transaction_details' => array(
-                'order_id' => $payment->id,
-                'gross_amount' => $payment->total,
-            ),
-            'customer_details' => array(
-                'name' => auth()->user()->name,
-                'email' => auth()->user()->email,
-                'phone' => auth()->user()->phone,
-            ),
-        );
+            // Create Order
+            $payment = Payment::create([
+                'quantity' => $duration,
+                'total' => $duration * 50000,
+                'status' => 'unpaid',
+                'user_id' => auth()->user()->id
+            ]);
 
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-        $title = "Checkout";
+            // Set your Merchant Server Key
+            \Midtrans\Config::$serverKey = config('midtrans.server_key');
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = false;
+            // Set sanitization on (default)
+            \Midtrans\Config::$isSanitized = true;
+            // Set 3DS transaction for credit card to true
+            \Midtrans\Config::$is3ds = true;
 
-        return view('order.checkout', compact('title', 'snapToken', 'payment'));
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => $payment->id,
+                    'gross_amount' => $payment->total,
+                ),
+                'customer_details' => array(
+                    'name' => auth()->user()->name,
+                    'email' => auth()->user()->email,
+                    'phone' => auth()->user()->phone,
+                ),
+            );
+
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            $title = "Checkout";
+
+            DB::commit();
+
+            return view('order.checkout', compact('title', 'snapToken', 'payment'));
+        } catch (Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with("error", "Order failed");
+        }
     }
 
     /**
@@ -87,18 +98,26 @@ class PaymentController extends Controller
      */
     public function update(Request $request, Payment $payment)
     {
-        $server_key = config('midtrans.server_key');
-        $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.$servey_key);
-        if($hashed == $request->signature_key) {
-            if($request->transaction_status == 'capture') {
-                $payment = Payment::find($request->order_id)->update(['status' => 'paid']);
+        try {
+            $server_key = config('midtrans.server_key');
+            $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $server_key);
+            if ($hashed == $request->signature_key) {
+                if ($request->transaction_status == 'capture') {
+                    $payment = Payment::find($request->order_id);
+                    $payment->update([
+                        'payment_date' => $request->transaction_time,
+                        'method' => $request->payment_type,
+                        'status' => 'paid'
+                    ]);
                 
-                $subscription = Subscription::firstWhere('user_id', auth()->user()->id);
-                $subscription->update([
-                    'status' => 'active', 
-                    'expired_date' => Carbon::now()->addMonths($payment->qty)
-                ]);
+                    $subscription = Subscription::firstWhere('user_id', auth()->user()->id);
+                    $subscription->update([
+                        'expired_date' => Carbon::now()->addMonths($payment->qty)->format('Y-m-d H:i:s')
+                    ]);
+                }
             }
+        } catch (Exception $e) {
+            return redirect()->back()->with("error", "failed");
         }
     }
 

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->dateTime('expired_date')->nullable();
-            $table->string('status');
 
             //foreign key
             $table->foreignUuid('user_id');              $table->foreign('user_id')->references('id')->on('users');

@@ -17,7 +17,6 @@ class Subscription extends Model
 
     protected $attributes = [
         'expired_date' => null,
-        'status' => 'none',
     ];
 
     // relations

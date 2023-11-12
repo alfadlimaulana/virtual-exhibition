@@ -20,13 +20,6 @@ class SubscriptionFactory extends Factory
         return [
             'id' => fake()->uuid(),
             'expired_date' => Carbon::parse($this->faker->dateTimeBetween('-1 week', '+4 weeks'))->format('Y-m-d H:i:s'),
-            'status' => function (array $attributes) {
-                if($attributes['expired_date']) {
-                    return Carbon::now() < $attributes['expired_date'] ? 'active' : 'expired';
-                } else {
-                    return 'none';
-                }
-            }
         ];
     }
 
@@ -38,7 +31,6 @@ class SubscriptionFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'expired_date' => null,
-                'status' => 'none'
             ];
         });
     }
@@ -51,7 +43,6 @@ class SubscriptionFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'expired_date' => Carbon::parse($this->faker->dateTimeBetween('now', '+4 weeks'))->format('Y-m-d H:i:s'),
-                'status' => 'active'
             ];
         });
     }
@@ -64,7 +55,6 @@ class SubscriptionFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'expired_date' => Carbon::parse($this->faker->dateTimeBetween('-1 week', 'now'))->format('Y-m-d H:i:s'),
-                'status' => 'expired'
             ];
         });
     }

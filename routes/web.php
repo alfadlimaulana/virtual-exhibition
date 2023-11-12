@@ -30,7 +30,6 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/checkout', [PaymentController::class, 'store'])->name('checkout');
-    Route::post('/midtrans-callback', [PaymentController::class, 'update'])->name('callback');
     Route::post('/like/{id}', [LikedPaintingController::class, 'store'])->name('like');
     Route::post('/unlike/{id}', [LikedPaintingController::class, 'destroy'])->name('unlike');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
