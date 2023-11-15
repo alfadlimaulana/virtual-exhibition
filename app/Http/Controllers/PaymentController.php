@@ -112,6 +112,10 @@ class PaymentController extends Controller
                         'status' => 'paid'
                     ]);
 
+                    $payment->user->update([
+                        'role' => 'pelukis'
+                    ]);
+
                     $payment->user->subscription->update([
                         'expired_date' => Carbon::now()->addMonths($payment->quantity)->format('Y-m-d H:i:s')
                     ]);

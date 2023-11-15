@@ -61,22 +61,26 @@
                                 <i class="fas fa-tachometer-alt fa-fw"></i>&nbsp;Dashboard Kurator
                             </a>
                         @endif
-                            <a href=""
+
+                        @if (auth()->user()->role == "pelukis")
+                            <a href="{{ route('dashboard.paintings')}}"
                                 class="block px-4 py-2 text-sm hover:text-black"
                                 role="menuitem">
                                 <i class="fas fa-user fa-fw"></i>&nbsp;Dashboard Pelukis
                             </a>
-                            <a href=""
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                class="block px-4 py-2 text-sm hover:text-black"
-                                role="menuitem">
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;Logout
-                            </a>
+                        @endif
+                            
+                        <a href=""
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                            class="block px-4 py-2 text-sm hover:text-black"
+                            role="menuitem">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;Logout
+                        </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                style="display: none;">
-                                @csrf
-                            </form>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                            style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                     @endauth
                 </div>

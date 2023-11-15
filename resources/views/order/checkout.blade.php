@@ -9,12 +9,7 @@
 @endpush
 
 @section('content')
-    @if(session()->has('failed'))
-        <script>
-            alert("{{ session('failed') }}");
-        </script>
-    @endif
-    
+<main>
     <section class="py-10" x-data="form()">
         <div class="container gap-8 lg:flex">
             <div class="w-full max-lg:mb-6">
@@ -72,9 +67,16 @@
             </div>
         </div>
     </section>
+</main>
 @endsection
 
 @push('script')
+@if(session()->has('failed'))
+    <script>
+        alert("{{ session('failed') }}");
+    </script>
+@endif
+    
 <script type="text/javascript">
     const snapToken = "{{ $snapToken }}"
     // For example trigger on button clicked, or any time you need

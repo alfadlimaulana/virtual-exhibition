@@ -1,12 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @if(session()->has('failed'))
-        <script>
-            alert("{{ session('failed') }}");
-        </script>
-    @endif
-    
+<main>
     <section class="py-10" x-data="form()">
         <div class="container gap-8 lg:flex">
             <div class="w-full max-lg:mb-6">
@@ -49,9 +44,16 @@
             </div>
         </div>
     </section>
+</main>
 @endsection
 
 @push('script')
+@if(session()->has('failed'))
+    <script>
+        alert("{{ session('failed') }}");
+    </script>
+@endif
+
 <script>
     const form = () => { 
         return {

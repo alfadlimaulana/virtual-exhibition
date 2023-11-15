@@ -1,12 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @if(session()->has('failed'))
-        <script>
-            alert("{{ session('failed') }}");
-        </script>
-    @endif
-    
+<main class="flex-grow grid place-items-center">
     <section class="py-10" x-data="carousel()">
         <div class="container gap-8 lg:flex">
             <div id="carousel" class="relative lg:w-1/3 max-lg:mb-4" data-images={{ $painting->paintingImages->pluck('image')}}>
@@ -30,21 +25,23 @@
                         <h2 class="mb-1.5">{{ $painting->title }}</h2>
                         <p class="lg:text-2xl">By: {{ $painting->user->name }}</p>
                     </div>
-                    @if($painting->likedPaintings->where('user_id', '=', auth()->user()->id)->count() > 0)
-                    <form action="{{ route('unlike', $painting->id) }}" method="POST">
-                        @csrf
-                        <x-button type="submit">
-                            <i class="text-3xl lg:text-4xl ph-fill ph-heart-straight"></i>
-                        </x-button>
-                    </form>
-                    @else
-                    <form action="{{ route('like', $painting->id) }}" method="POST">
-                        @csrf
-                        <x-button type="submit">
-                            <i class="text-3xl lg:text-4xl ph ph-heart-straight"></i>
-                        </x-button>
-                    </form>
-                    @endif
+                    @auth
+                        @if($liked)
+                        <form action="{{ route('unlike', $painting->id) }}" method="POST">
+                            @csrf
+                            <x-button type="submit">
+                                <i class="text-3xl lg:text-4xl ph-fill ph-heart-straight"></i>
+                            </x-button>
+                        </form>
+                        @else
+                        <form action="{{ route('like', $painting->id) }}" method="POST">
+                            @csrf
+                            <x-button type="submit">
+                                <i class="text-3xl lg:text-4xl ph ph-heart-straight"></i>
+                            </x-button>
+                        </form>
+                        @endif
+                    @endauth
                 </div>
                 <hr class="block my-4">
                 <div>
@@ -73,9 +70,15 @@
             </div>
         </div>
     </section>
+</main>
 @endsection
 
 @push('script')
+@if(session()->has('failed'))
+    <script>
+        alert("{{ session('failed') }}");
+    </script>
+@endif
 <script>
     const carousel = () => {
         const images = JSON.parse(document.getElementById('carousel').dataset.images);

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PaintingController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LikedPaintingController;
@@ -17,8 +18,8 @@ use App\Http\Controllers\LikedPaintingController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/detail/{painting}', [PageController::class, 'detail'])->name('detail');
+Route::get('/', [PaintingController::class, 'index'])->name('home');
+Route::get('/detail/{painting}', [PaintingController::class, 'show'])->name('detail');
 Route::get('/pricing', [PaymentController::class, 'create'])->name('pricing');
 
 Route::middleware('guest')->group(function () {
@@ -33,4 +34,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/like/{id}', [LikedPaintingController::class, 'store'])->name('like');
     Route::post('/unlike/{id}', [LikedPaintingController::class, 'destroy'])->name('unlike');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+
+    Route::prefix('dashboard')->name('dashboard.')->group(function() {
+        Route::get('/paintings', [PaintingController::class, 'userPaintings'])->name('paintings');
+        Route::name('paintings.')->group(function(){
+            // Route::get('/paintings', [PaintingController::class, 'userPaintings'])->name('paintings');
+        });
+    });
 });

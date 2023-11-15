@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function home(Request $request)
+    public function artistDashboard(Request $request)
     {
         $paintings = Painting::with(['paintingImages', 'user'])->filter($request->query())->paginate(9);
         $paintings->appends(

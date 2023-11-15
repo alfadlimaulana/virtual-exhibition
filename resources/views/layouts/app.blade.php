@@ -22,9 +22,7 @@
             @include('layouts._navbar')
 
             <!-- Page Content -->
-            <main class="grid flex-grow place-items-center">
-                @yield('content')
-            </main>
+            @yield('content')
 
             @include('layouts._footer')
         </div>
