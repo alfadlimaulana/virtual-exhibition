@@ -18,7 +18,7 @@ class Painting extends Model
         'id',
     ];
 
-    protected $attibutes = [
+    protected $attributes = [
         'status' => 'on review',
     ];
 

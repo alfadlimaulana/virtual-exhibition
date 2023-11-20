@@ -24,11 +24,10 @@ class PageController extends Controller
         ]);
     }
 
-    public function detail(Painting $painting)
+    public function expired()
     {
-        return view('detail', [
-            "title" => "Painting Detail",
-            "painting" => $painting,
+        return view('expired', [
+            "title" => "Subscription Expired",
         ]);
     }
 }

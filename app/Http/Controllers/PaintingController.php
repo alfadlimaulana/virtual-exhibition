@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Painting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StorePaintingRequest;
 
 class PaintingController extends Controller
 {
@@ -32,15 +33,24 @@ class PaintingController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.add', [
+            "title" => "Tambah Lukisan",
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePaintingRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $validated['dimension'] = $validated['height'] . ' x ' . $validated['width'];
+        $validated['user_id'] = $request->user()->id;
+        unset($validated['height'], $validated['width']);
+
+        $painting = Painting::create($validated);
+        
+        return redirect()->route('dashboard.paintings')->with('success', 'Lukisan berhasil ditambahkan dan akan ditinjau oleh kurator.');
     }
 
     /**
@@ -85,7 +95,7 @@ class PaintingController extends Controller
 
     public function userPaintings(Request $request)
     {
-        $paintings = Painting::where('user_id', auth()->user()->id)->filter($request->query())->paginate(8);
+        $paintings = Painting::where('user_id', auth()->user()->id)->with(['likedPaintings'])->filter($request->query())->latest()->paginate(8);
 
         return view('dashboard.index', [
             "title" => "Dashboard",

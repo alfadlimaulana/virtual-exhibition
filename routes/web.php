@@ -21,6 +21,7 @@ use App\Http\Controllers\LikedPaintingController;
 Route::get('/', [PaintingController::class, 'index'])->name('home');
 Route::get('/detail/{painting}', [PaintingController::class, 'show'])->name('detail');
 Route::get('/pricing', [PaymentController::class, 'create'])->name('pricing');
+Route::get('/expired', [PageController::class, 'expired'])->name('expired');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
@@ -35,10 +36,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/unlike/{id}', [LikedPaintingController::class, 'destroy'])->name('unlike');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
-    Route::prefix('dashboard')->name('dashboard.')->group(function() {
+    Route::middleware('role:pelukis')->prefix('dashboard')->name('dashboard.')->group(function() {
         Route::get('/paintings', [PaintingController::class, 'userPaintings'])->name('paintings');
-        Route::name('paintings.')->group(function(){
-            // Route::get('/paintings', [PaintingController::class, 'userPaintings'])->name('paintings');
+        Route::prefix('/paintings')->name('paintings.')->group(function(){
+            Route::get('/add', [PaintingController::class, 'create'])->name('add');
+            Route::post('/store', [PaintingController::class, 'store'])->name('store');
         });
     });
 });
