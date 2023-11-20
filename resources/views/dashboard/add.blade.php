@@ -6,7 +6,7 @@
         <div class="w-full max-w-xl mx-auto">
             <h4 class="mb-6  text-center">Tambah Lukisan</h4>
             
-            <form method="POST" action="{{ route('dashboard.paintings.store') }}" class="mb-3">
+            <form method="POST" action="{{ route('dashboard.paintings.store') }}" class="mb-3" enctype="multipart/form-data">
                 @csrf
             
                 <div class="mb-3 md:flex gap-3">
@@ -74,7 +74,7 @@
                 </div>
             
                 <!-- Dimensi -->
-                <div class="mb-8 flex items-center gap-3">
+                <div class="mb-3 flex items-center gap-3">
                     <div class="max-md:mb-3 w-full">
                         <x-forms.label for="height">Panjang (cm)</x-forms.label>
                         <x-forms.input type="number" id="height" name="height" :value="old('height')" required min="1" max="999"/>
@@ -90,6 +90,14 @@
                             <x-forms.error>{{ $message }}</x-forms.error>
                         @enderror
                     </div>
+                </div>
+
+                <div class="mb-8">
+                    <x-forms.label for="images">Gambar</x-forms.label>
+                    <x-forms.input type="file" id="images" name="images[]" :value="old('images')" required multiple/>
+                    @error('images')
+                        <x-forms.error>{{ $message }}</x-forms.error>
+                    @enderror
                 </div>
     
                 <x-button type="submit" class="w-full ml-auto px-8 !text-base text-white bg-gray-500 hover:bg-gray-600">

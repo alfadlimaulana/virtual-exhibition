@@ -29,7 +29,9 @@ class StorePaintingRequest extends FormRequest
             'material' => 'required|string',
             'category' => 'required|string',
             'height' => 'required|integer|between:0,1000',
-            'width' => 'required|integer|between:0,1000'
+            'width' => 'required|integer|between:0,1000',
+            'images' => 'required|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 }

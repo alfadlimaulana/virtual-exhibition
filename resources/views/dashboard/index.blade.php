@@ -52,4 +52,12 @@
         {{ $paintings->links() }}
     </div>
 </main>
+@push('script')
+    @if(session()->has('success'))
+        <script>
+            alert("{{ session('failed') }}");
+        </script>
+    @endif
+@endpush
 @endsection
+

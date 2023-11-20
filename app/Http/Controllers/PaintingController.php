@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Painting;
+use App\Traits\FileTrait;
 use Illuminate\Http\Request;
+use App\Models\PaintingImage;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePaintingRequest;
 
@@ -44,11 +46,26 @@ class PaintingController extends Controller
     public function store(StorePaintingRequest $request)
     {
         $validated = $request->validated();
+
         $validated['dimension'] = $validated['height'] . ' x ' . $validated['width'];
         $validated['user_id'] = $request->user()->id;
-        unset($validated['height'], $validated['width']);
 
+        $images = [];
+        foreach ($request->file('images') as $image) {
+            // $path = FileTrait::store_file(null, $image['image'], 'love_stories');
+            $dir_image = $image->store('img/painting-images', 'public');
+            $images[] = $dir_image;
+        }
+
+        unset($validated['height'], $validated['width'], $validated['images']);
         $painting = Painting::create($validated);
+
+        foreach ($images as $image) {
+            $image = PaintingImage::create([
+                'image' => $image,
+                'painting_id' => $painting->id
+            ]);
+        }
         
         return redirect()->route('dashboard.paintings')->with('success', 'Lukisan berhasil ditambahkan dan akan ditinjau oleh kurator.');
     }
