@@ -109,11 +109,17 @@ class PaintingController extends Controller
         unset($validated['height'], $validated['width']);
 
         $images = [];
+        // $old_images = $painting->paintingImages->pluck('image');
+
+        $old_images = $painting->paintingImages->pluck('image')->toArray();
+
+        // dd($old_images);
+
         if($request->file('images')){
             $painting->paintingImages()->delete();
+            Storage::disk('public')->delete($old_images);
 
             foreach ($request->file('images') as $image) {
-                Storage::delete($painting->paintingImages->pluck('image'));
                 $dir_image = $image->store('img/painting-images', 'public');
                 $images[] = $dir_image;
             }
