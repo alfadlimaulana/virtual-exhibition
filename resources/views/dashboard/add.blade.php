@@ -2,7 +2,7 @@
 
 @section('content')
 <main class="flex-grow grid place-items-center p-8">
-    <div class="flex items-center w-full max-w-5xl p-8 md:border border-black rounded-md aspect-video">
+    <div class="flex items-center w-full max-w-5xl p-8 md:border border-black rounded-md">
         <div class="w-full max-w-xl mx-auto">
             <h4 class="mb-6  text-center">Tambah Lukisan</h4>
             
@@ -97,6 +97,8 @@
                     <x-forms.input type="file" id="images" name="images[]" :value="old('images')" required multiple/>
                     @error('images')
                         <x-forms.error>{{ $message }}</x-forms.error>
+                    @else
+                        <p class="text-sm mt-1">* Maksimal 3 foto di bawah 3 Mb dengan format jpg, jpeg, atau png..</p>
                     @enderror
                 </div>
     

@@ -7,7 +7,9 @@ use App\Traits\FileTrait;
 use Illuminate\Http\Request;
 use App\Models\PaintingImage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorePaintingRequest;
+use App\Http\Requests\UpdatePaintingRequest;
 
 class PaintingController extends Controller
 {
@@ -47,12 +49,11 @@ class PaintingController extends Controller
     {
         $validated = $request->validated();
 
-        $validated['dimension'] = $validated['height'] . ' x ' . $validated['width'];
+        $validated['dimension'] = $validated['height'] . ' X ' . $validated['width'];
         $validated['user_id'] = $request->user()->id;
 
         $images = [];
         foreach ($request->file('images') as $image) {
-            // $path = FileTrait::store_file(null, $image['image'], 'love_stories');
             $dir_image = $image->store('img/painting-images', 'public');
             $images[] = $dir_image;
         }
@@ -80,7 +81,7 @@ class PaintingController extends Controller
         }
 
         return view('detail', [
-            "title" => "Painting Detail",
+            "title" => "Detil Painting",
             "painting" => $painting,
             "liked" => $liked ?? false
         ]);
@@ -91,15 +92,44 @@ class PaintingController extends Controller
      */
     public function edit(Painting $painting)
     {
-        //
+        return view('dashboard.edit', [
+            "title" => "Edit Lukisan",
+            "painting" => $painting,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Painting $painting)
+    public function update(UpdatePaintingRequest $request, Painting $painting)
     {
-        //
+        $validated = $request->except('_token');
+
+        $validated['dimension'] = $validated['height'] . ' X ' . $validated['width'];
+        unset($validated['height'], $validated['width']);
+
+        $images = [];
+        if($request->file('images')){
+            $painting->paintingImages()->delete();
+
+            foreach ($request->file('images') as $image) {
+                Storage::delete($painting->paintingImages->pluck('image'));
+                $dir_image = $image->store('img/painting-images', 'public');
+                $images[] = $dir_image;
+            }
+            
+            unset($validated['images']);
+        }
+
+        $painting->update($validated);
+        foreach ($images as $image) {
+            $image = PaintingImage::create([
+                'image' => $image,
+                'painting_id' => $painting->id
+            ]);
+        }
+
+        return redirect()->route('dashboard.paintings')->with('success', 'Lukisan berhasil diubah');
     }
 
     /**

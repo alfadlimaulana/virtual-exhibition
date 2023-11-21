@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/paintings')->name('paintings.')->group(function(){
             Route::get('/add', [PaintingController::class, 'create'])->name('add');
             Route::post('/store', [PaintingController::class, 'store'])->name('store');
+            Route::get('/{painting}/edit', [PaintingController::class, 'edit'])->name('edit');
+            Route::post('/{painting}/update', [PaintingController::class, 'update'])->name('update');
         });
     });
 });

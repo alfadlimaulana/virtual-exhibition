@@ -5,14 +5,14 @@ namespace App\Http\Requests;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePaintingRequest extends FormRequest
+class UpdatePaintingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return auth()->user()->role == 'pelukis' && Carbon::now() < auth()->user()->subscription->expired_date;
+        return auth()->user()->role == 'pelukis' && Carbon::now() < auth()->user()->subscription->expired_date;;
     }
 
     /**
@@ -30,7 +30,7 @@ class StorePaintingRequest extends FormRequest
             'category' => 'required|string',
             'height' => 'required|integer|between:0,1000',
             'width' => 'required|integer|between:0,1000',
-            'images' => 'required|array|max:3',
+            'images' => 'array|max:3',
             'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ];
     }

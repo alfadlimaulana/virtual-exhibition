@@ -29,7 +29,7 @@
                     <th scope="col" class="px-3 py-2">Disukai</th>
                     <th scope="col" class="px-3 py-2">Dibuat Pada</th>
                     <th scope="col" class="px-3 py-2">Status</th>
-                    <th scope="col" class="px-3 py-2">Aksi</th>
+                    <th scope="col" class="px-3 py-2 text-center">Aksi</th>
                 </thead>
                 <tbody>
                     @foreach ($paintings as $painting)
@@ -40,9 +40,13 @@
                             <td class="px-3 py-2">{{ $painting->likedPaintings->count() }}</td>
                             <td class="px-3 py-2">{{ \Carbon\Carbon::parse($painting->created_at)->format('d-m-Y') }}</td>
                             <td class="px-3 py-2">{{ $painting->status }}</td>
-                            <td class="px-3 py-2 flex gap-2">
-                                <a class="bg-gray-500 w-8 h-8 rounded-md grid place-items-center"><i class="ph ph-pencil-simple text-white"></i></a>
-                                <a class="bg-gray-500 w-8 h-8 rounded-md grid place-items-center"><i class="ph ph-trash text-white"></i></a>
+                            <td class="px-3 py-2 flex gap-2 justify-center">
+                                <x-button-a href="{{ route('dashboard.paintings.edit', $painting->id) }}" class="bg-gray-500 !w-8 !h-8 !p-0 rounded-md grid place-items-center">
+                                    <i class="ph ph-pencil-simple text-white"></i>
+                                </x-button-a>
+                                <x-button-a href="" class="bg-gray-500 !w-8 !h-8 !p-0 rounded-md grid place-items-center">
+                                    <i class="ph ph-trash text-white"></i>
+                                </x-button-a>
                             </td>
                         </tr>
                     @endforeach
@@ -55,7 +59,7 @@
 @push('script')
     @if(session()->has('success'))
         <script>
-            alert("{{ session('failed') }}");
+            alert("{{ session('success') }}");
         </script>
     @endif
 @endpush
