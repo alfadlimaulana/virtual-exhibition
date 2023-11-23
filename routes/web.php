@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', [PaintingController::class, 'store'])->name('store');
             Route::get('/{painting}/edit', [PaintingController::class, 'edit'])->name('edit');
             Route::post('/{painting}/update', [PaintingController::class, 'update'])->name('update');
+            Route::delete('/{painting}/delete', [PaintingController::class, 'destroy'])->name('delete');
         });
     });
 });

@@ -106,27 +106,22 @@ class PaintingController extends Controller
         $validated = $request->except('_token');
 
         $validated['dimension'] = $validated['height'] . ' X ' . $validated['width'];
-        unset($validated['height'], $validated['width']);
-
+        unset($validated['height'], $validated['width'], $validated['images']);
+        
         $images = [];
-        // $old_images = $painting->paintingImages->pluck('image');
-
         $old_images = $painting->paintingImages->pluck('image')->toArray();
-
-        // dd($old_images);
-
         if($request->file('images')){
             $painting->paintingImages()->delete();
             Storage::disk('public')->delete($old_images);
-
+            
             foreach ($request->file('images') as $image) {
                 $dir_image = $image->store('img/painting-images', 'public');
                 $images[] = $dir_image;
             }
             
-            unset($validated['images']);
+            $validated['status'] = 'on review';
         }
-
+        
         $painting->update($validated);
         foreach ($images as $image) {
             $image = PaintingImage::create([
@@ -143,7 +138,9 @@ class PaintingController extends Controller
      */
     public function destroy(Painting $painting)
     {
-        //
+        $painting->paintingImages()->delete();
+        $painting->delete();
+        return redirect()->route('dashboard.paintings')->with('success', 'Lukisan berhasil dihapus');
     }
 
     public function userPaintings(Request $request)

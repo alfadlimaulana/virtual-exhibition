@@ -52,36 +52,38 @@
                     </div>
 
                     @auth
-                    <div x-show="isUserMenuOpen" @click.away="isUserMenuOpen = false" x-transition
-                        class="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-gray-200 rounded-md shadow-lg ring-1 ring-gray-400 focus:outline-none"
-                        role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                        @if(false)
-                            <a href='' role="menuitem"
-                                class="block px-4 py-2 text-sm hover:text-black">
-                                <i class="fas fa-tachometer-alt fa-fw"></i>&nbsp;Dashboard Kurator
-                            </a>
-                        @endif
-
-                        @if (auth()->user()->role == "pelukis")
-                            <a href="{{ route('dashboard.paintings')}}"
+                    <template x-if="true">
+                        <div x-show="isUserMenuOpen" @click.away="isUserMenuOpen = false" x-transition
+                            class="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-gray-200 rounded-md shadow-lg ring-1 ring-gray-400 focus:outline-none"
+                            role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                            @if(false)
+                                <a href='' role="menuitem"
+                                    class="block px-4 py-2 text-sm hover:text-black">
+                                    <i class="fas fa-tachometer-alt fa-fw"></i>&nbsp;Dashboard Kurator
+                                </a>
+                            @endif
+    
+                            @if (auth()->user()->role == "pelukis")
+                                <a href="{{ route('dashboard.paintings')}}"
+                                    class="block px-4 py-2 text-sm hover:text-black"
+                                    role="menuitem">
+                                    <i class="fas fa-user fa-fw"></i>&nbsp;Dashboard Pelukis
+                                </a>
+                            @endif
+                                
+                            <a href=""
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                 class="block px-4 py-2 text-sm hover:text-black"
                                 role="menuitem">
-                                <i class="fas fa-user fa-fw"></i>&nbsp;Dashboard Pelukis
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;Logout
                             </a>
-                        @endif
-                            
-                        <a href=""
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                            class="block px-4 py-2 text-sm hover:text-black"
-                            role="menuitem">
-                            <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;Logout
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                            style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
+    
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </template>
                     @endauth
                 </div>
             </div>
