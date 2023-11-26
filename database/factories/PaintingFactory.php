@@ -25,7 +25,7 @@ class PaintingFactory extends Factory
             'material' => fake()->randomElement(['acrylic', 'oil', 'watercolor', 'gouache', 'encaustic', 'other']),
             "category" => fake()->randomElement(["realism", "photorealism", "expressionism", "impressionism", "abstract", "surrealism", "pop art", "other"]),
             'dimension' =>  fake()->numberBetween(50,150) . ' X ' . fake()->numberBetween(50,150),
-            'status' => fake()->randomElement(['on display', 'on review']),
+            'status' => fake()->randomElement(['on display', 'on review', 'rejected']),
         ];
     }
 }

@@ -118,7 +118,9 @@ class PaintingController extends Controller
                 $dir_image = $image->store('img/painting-images', 'public');
                 $images[] = $dir_image;
             }
-            
+        }
+
+        if($request->file('images') || $painting->status == 'rejected'){
             $validated['status'] = 'on review';
         }
         
@@ -145,7 +147,7 @@ class PaintingController extends Controller
 
     public function userPaintings(Request $request)
     {
-        $paintings = Painting::where('user_id', auth()->user()->id)->with(['likedPaintings'])->filter($request->query())->latest()->paginate(8);
+        $paintings = Painting::where('user_id', auth()->user()->id)->withCount('likedPaintings')->filter($request->query())->latest()->paginate(8);
 
         return view('dashboard.index', [
             "title" => "Dashboard",

@@ -6,6 +6,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaintingController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Admin;
 use App\Http\Controllers\LikedPaintingController;
 
 /*
@@ -36,14 +37,25 @@ Route::middleware('auth')->group(function () {
     Route::post('/unlike/{id}', [LikedPaintingController::class, 'destroy'])->name('unlike');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
-    Route::middleware('role:pelukis')->prefix('dashboard')->name('dashboard.')->group(function() {
-        Route::get('/paintings', [PaintingController::class, 'userPaintings'])->name('paintings');
-        Route::prefix('/paintings')->name('paintings.')->group(function(){
-            Route::get('/add', [PaintingController::class, 'create'])->name('add');
-            Route::post('/store', [PaintingController::class, 'store'])->name('store');
-            Route::get('/{painting}/edit', [PaintingController::class, 'edit'])->name('edit');
-            Route::post('/{painting}/update', [PaintingController::class, 'update'])->name('update');
-            Route::delete('/{painting}/delete', [PaintingController::class, 'destroy'])->name('delete');
+    Route::prefix('dashboard')->name('dashboard.')->group(function() {
+        Route::middleware('role:pelukis')->group(function() {
+            Route::get('/paintings', [PaintingController::class, 'userPaintings'])->name('paintings');
+            Route::prefix('/paintings')->name('paintings.')->group(function(){
+                Route::get('/add', [PaintingController::class, 'create'])->name('add');
+                Route::post('/store', [PaintingController::class, 'store'])->name('store');
+                Route::get('/{painting}/edit', [PaintingController::class, 'edit'])->name('edit');
+                Route::post('/{painting}/update', [PaintingController::class, 'update'])->name('update');
+                Route::delete('/{painting}/delete', [PaintingController::class, 'destroy'])->name('delete');
+            });
+        });
+
+        Route::middleware('role:kurator')->prefix('kurator')->name('kurator.')->group(function() {
+            Route::get('/paintings', [Admin\PaintingController::class, 'index'])->name('paintings');
+            Route::prefix('/paintings')->name('paintings.')->group(function(){
+                Route::get('/{painting}/detail', [Admin\PaintingController::class, 'show'])->name('detail');
+                Route::get('/{painting}/approve', [Admin\PaintingController::class, 'approve'])->name('approve');
+                Route::get('/{painting}/reject', [Admin\PaintingController::class, 'reject'])->name('reject');
+            });
         });
     });
 });

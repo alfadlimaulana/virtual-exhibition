@@ -66,6 +66,11 @@ class User extends Authenticatable
 
     public function likedPaintings(): HasMany
     {
-        return $this->hasMany(LikedPaintings::class);
+        return $this->hasMany(LikedPainting::class);
+    }
+
+    public function feedbacks(): HasMany
+    {
+        return $this->hasMany(Feedback::class);
     }
 }

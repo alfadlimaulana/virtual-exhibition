@@ -17,7 +17,6 @@
                         </button>
                     </div>
                 </form>
-                <x-button-a href="{{ route('dashboard.paintings.add') }}" class="bg-gray-200 hover:bg-gray-300 whitespace-nowrap max-md:mt-2.5 max-md:ml-auto">Tambah Lukisan</x-button-a>
             </div>
         </div>
         <div class="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
@@ -26,9 +25,7 @@
                     <th scope="col" class="px-3 py-2">Judul</th>
                     <th scope="col" class="px-3 py-2">Tahun</th>
                     <th scope="col" class="px-3 py-2">Kategori</th>
-                    <th scope="col" class="px-3 py-2">Disukai</th>
                     <th scope="col" class="px-3 py-2">Dibuat Pada</th>
-                    <th scope="col" class="px-3 py-2">Status</th>
                     <th scope="col" class="px-3 py-2 text-center">Aksi</th>
                 </thead>
                 <tbody>
@@ -37,20 +34,11 @@
                             <td class="px-3 py-2">{{ $painting->title }}</td>
                             <td class="px-3 py-2">{{ $painting->year }}</td>
                             <td class="px-3 py-2">{{ $painting->category }}</td>
-                            <td class="px-3 py-2">{{ $painting->liked_paintings_count }}</td>
                             <td class="px-3 py-2">{{ \Carbon\Carbon::parse($painting->created_at)->format('d-m-Y') }}</td>
-                            <td class="px-3 py-2">{{ $painting->status }}</td>
                             <td class="flex justify-center gap-2 px-3 py-2">
-                                <x-button-a href="{{ route('dashboard.paintings.edit', $painting->id) }}" class="bg-gray-500 !w-8 !h-8 !p-0 rounded-md grid place-items-center">
-                                    <i class="text-white ph ph-pencil-simple"></i>
+                                <x-button-a href="{{ route('dashboard.kurator.paintings.detail', $painting->id) }}" class="bg-gray-500 !w-8 !h-8 !p-0 rounded-md grid place-items-center">
+                                    <i class="text-white ph ph-eye"></i>
                                 </x-button-a>
-                                <form id="deleteForm" action="{{ route('dashboard.paintings.delete', $painting->id)}}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <x-button type="button" @click="showModal()" class="bg-gray-500 !w-8 !h-8 !p-0 rounded-md grid place-items-center">
-                                        <i class="text-white ph ph-trash"></i>
-                                    </x-button>
-                                </form>
                             </td>
                         </tr>
                     @endforeach

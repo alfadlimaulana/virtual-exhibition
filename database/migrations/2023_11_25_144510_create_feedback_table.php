@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('liked_paintings', function (Blueprint $table) {
+        Schema::create('feedback', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->text('message');
 
             //foreign key
             $table->foreignUuid('user_id');              $table->foreign('user_id')->references('id')->on('users');
             $table->foreignUuid('painting_id');          $table->foreign('painting_id')->references('id')->on('paintings');
-            
+
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('liked_paintings');
+        Schema::dropIfExists('feedback');
     }
 };

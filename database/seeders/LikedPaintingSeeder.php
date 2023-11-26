@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Painting;
 use Illuminate\Support\Str;
+use App\Models\LikedPainting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -20,13 +21,13 @@ class LikedPaintingSeeder extends Seeder
         $users = User::all();
 
         foreach ($users as $user) {
-            DB::table('liked_paintings')->insert([
+            LikedPainting::create([
                 'id' => Str::uuid(),
                 'user_id' => $user->id,
                 'painting_id' => $paintings->random()->id,
             ]);
 
-            DB::table('liked_paintings')->insert([
+            LikedPainting::create([
                 'id' => Str::uuid(),
                 'user_id' => $user->id,
                 'painting_id' => $paintings->random()->id,
