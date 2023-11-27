@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Feedback;
 use App\Models\Painting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,9 +33,14 @@ class PaintingController extends Controller
         return redirect()->route('dashboard.kurator.paintings')->with('success', 'Lukisan telah disetujui');
     }
 
-    public function reject(Painting $painting)
+    public function reject(Request $request, Painting $painting)
     {
         $painting->update(["status" => "rejected"]);
+        $painting->feedbacks()->create([
+            "message" => $request->input('message'),
+            'user_id' => $request->user()->id
+        ]);
+
         return redirect()->route('dashboard.kurator.paintings')->with('success', 'Lukisan telah ditolak');
     }
 }

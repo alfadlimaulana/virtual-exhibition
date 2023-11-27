@@ -4,7 +4,7 @@
 <main x-data="modals()" class="flex-grow py-12">
     <div class="container">
         <div class="mb-8 xl:flex">
-            <h3 class="w-full max-xl:mb-8 max-xl:text-center whitespace-nowrap">Dashboard Pelukis</h1>
+            <h3 class="w-full max-xl:mb-8 max-xl:text-center whitespace-nowrap">Dashboard Kurator</h1>
             <div class="w-full gap-3 md:flex">
                 <form action="{{ route('dashboard.paintings') }}" class="w-full">
                     <div class="relative">

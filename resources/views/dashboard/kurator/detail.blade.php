@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="flex-grow grid place-items-center">
-    <section class="py-10 w-full" x-data="carousel()">
-        <div class="container gap-8 xl:flex">
+<main class="flex-grow grid place-items-center" x-data="modals()">
+    <section class="py-10 w-full" >
+        <div x-data="carousel()" class="container gap-8 xl:flex">
             <div id="carousel" class="relative xl:w-2/5 max-xl:mb-4 align-self-stretch" data-images={{ $painting->paintingImages->pluck('image')}}>
                 <img :src="`{{asset('${images[selected]}')}}`" alt="{{ $painting->title }}"
                         class="object-cover w-full xl:h-full aspect-square md:max-xl:aspect-video">
@@ -106,17 +106,51 @@
                     </div>
 
                     <div class="flex gap-3 justify-end">
-                        <x-button type="submit" class="px-8 !text-base text-white bg-gray-500 hover:bg-gray-600">
-                            Setujui
-                        </x-button>
-                        <x-button type="submit" class="px-8 !text-base text-white bg-gray-500 hover:bg-gray-600">
+                        <x-button @click="showModal()" class="px-8 !text-base border border-gray-500 hover:bg-gray-100">
                             Tolak
                         </x-button>
+                        <x-button-a href="{{ route('dashboard.kurator.paintings.approve', $painting->id) }}" class="px-8 !text-base text-white bg-gray-500 hover:bg-gray-600">
+                            Setujui
+                        </x-button-a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <template x-if="true">
+        <div x-show="show" id="popup-modal" class="fixed top-0 left-0 right-0 z-50 items-center justify-center w-full h-full overflow-x-hidden overflow-y-auto md:inset-0" :class="show ? 'bg-black bg-opacity-40' : ''">
+            <div class="relative w-full max-w-md max-h-full p-4 mx-auto -translate-y-1/2 top-1/2">
+                <div class="relative bg-white rounded-lg shadow">
+                    <div class="flex items-center justify-between p-2.5 md:p-3 border-b rounded-t">
+                        <h3 class="text-lg font-semibold text-gray-900">
+                            Beri Umpan Balik
+                        </h3>
+                        <button @click="hideModal()" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="crud-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <form action="{{ route('dashboard.kurator.paintings.reject', $painting->id) }}" class="p-2.5 md:p-3">
+                        <div class="mb-4">
+                            <div>
+                                <x-forms.label for="message">Pesan</x-forms.label>
+                                <x-forms.textarea rows="3" id="message" name="message" value=""></x-forms.textarea>                    
+                                @error('message')
+                                    <x-forms.error>{{ $message }}</x-forms.error>
+                                @enderror
+                            </div>
+                        </div>
+                        <x-button type="submit" class="ml-auto bg-gray-500 hover:bg-gray-600 text-white">
+                            Kirimkan
+                        </x-button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </template>
 </main>
 @endsection
 
@@ -151,5 +185,21 @@
             }
         };
     };
+
+    let modals = () => {
+        return {
+            show: false,
+            showModal(id) {
+                this.show = true
+            },
+            hideModal() {
+                this.show = false
+            },
+            submitForm(id) {
+                form = document.getElementById(id);
+                form.submit()
+            }
+        }
+    }
 </script>
 @endpush
