@@ -11,8 +11,8 @@
             <div class="grid w-full place-items-center">
                 <div>
                     <div class="mb-4">
-                        <h2 class="mb-4">Subscription</h2>
-                        <p>Hanya dengan <strong>Rp50.000/Bulan</strong> dapatkan lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique ea rerum distinctio sed sapiente iste eos expedita quidem tenetur necessitatibus iure aliquid molestiae quasi accusantium maxime, excepturi fugit, est voluptatibus.</p>
+                        <h2 class="mb-4">Waktunya Bersinar!</h2>
+                        <p>Bergabunglah sebagai pelukis di Virtual Exhibition. Lihat setiap apresiasi, manajemen koleksi lukisan yang efisien, dan kesempatan untuk menjalin koneksi pribadi dengan penggemar Anda. Semua hanya <strong>Rp50.000 / bulan</strong>!</p>
                     </div>
                     <form action="{{ route('checkout') }}" method="POST">
                         @csrf

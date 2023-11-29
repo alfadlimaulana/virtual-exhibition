@@ -66,6 +66,13 @@
                             </dd>
                         </div>
                     </dl>
+                    <p>Contact person:</p>
+                    <dl>
+                        <div class="flex gap-1.5 items-center">
+                            <dt class="text-sm text-gray-600"><i class="ph-fill ph-phone text-xl"></i></dt>
+                            <dd>{{ auth()->user()->phone }}</dd>
+                        </div>
+                    </dl>
                 </div>
             </div>
         </div>
