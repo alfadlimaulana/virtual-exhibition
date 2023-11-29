@@ -38,7 +38,7 @@
                                 <td class="px-2 py-1" x-text="setTotal(duration)"></td>
                             </tr>
                         </table>
-                        <x-button type="submit" class="max-md:w-full py-2.5 bg-gray-500 text-white">Bayar Sekarang</x-button>
+                        <x-button type="submit" class="max-md:w-full py-2.5 bg-gray-500 text-white">Buat Pesanan</x-button>
                     </form>
                 </div>
             </div>

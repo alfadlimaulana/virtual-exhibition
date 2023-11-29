@@ -101,10 +101,15 @@
                         <p class="text-sm mt-1">* Maksimal 3 foto di bawah 3 Mb dengan format jpg, jpeg, atau png..</p>
                     @enderror
                 </div>
-    
-                <x-button type="submit" class="w-full ml-auto px-8 !text-base text-white bg-gray-500 hover:bg-gray-600">
-                    Tambah
-                </x-button>
+                
+                <div class="flex max-sm:flex-col gap-1.5">
+                    <x-button-a href="{{ route('dashboard.paintings') }}" type="submit" class="max-sm:order-2 w-full ml-auto px-8 !text-base border border-gray-500 hover:bg-gray-100">
+                        Batal
+                    </x-button-a>
+                    <x-button type="submit" class="w-full ml-auto px-8 !text-base text-white bg-gray-500 hover:bg-gray-600">
+                        Tambah
+                    </x-button>
+                </div>
             </form>
         </div>
     </div>

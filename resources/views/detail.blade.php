@@ -4,8 +4,8 @@
 <main class="flex-grow grid place-items-center">
     <section class="py-10" x-data="carousel()">
         <div class="container gap-8 lg:flex">
-            <div id="carousel" class="relative lg:w-1/3 max-lg:mb-4" data-images={{ $painting->paintingImages->pluck('image')}}>
-                <img :src="`{{asset('${images[selected]}')}}`" alt="{{ $painting->title }}"
+            <div id="carousel" class="relative lg:w-1/3 max-lg:mb-4" data-images={{ $painting->paintingImages->pluck('image')->map(function($image) {return asset($image);}) }}>
+                <img @click="openImage(selected)" :src="images[selected]" alt="{{ $painting->title }}"
                         class="object-cover w-full aspect-square object-fit">
                 <button @click="prevImage" class="absolute h-10 p-2 -translate-y-1/2 border border-gray-500 rounded-full cursor-pointer bg-gray-50 bg-opacity-60 left-4 top-1/2 group aspect-square hover:bg-opacity-100">
                     <i class="ph ph-caret-left"></i>
@@ -70,6 +70,10 @@
             </div>
         </div>
     </section>
+
+    @foreach ($painting->paintingImages as $paintingImage)
+        <a data-fslightbox="paintings" href="{{ asset($paintingImage->image) }}"></a>
+    @endforeach
 </main>
 @endsection
 
@@ -79,9 +83,12 @@
         alert("{{ session('failed') }}");
     </script>
 @endif
+<script src="{{ asset('js/fslightbox.js') }}"></script>
 <script>
     const carousel = () => {
         const images = JSON.parse(document.getElementById('carousel').dataset.images);
+        const lightbox = new FsLightbox();
+        lightbox.props.sources = images;
         return {
             selected: 0,
             images: images,
@@ -101,6 +108,9 @@
             },
             goToImage(index) {
                 this.selected = index
+            },
+            openImage(index) {
+                lightbox.open(index);
             }
         };
     };
