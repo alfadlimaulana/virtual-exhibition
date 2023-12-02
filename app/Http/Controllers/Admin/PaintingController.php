@@ -11,7 +11,16 @@ class PaintingController extends Controller
 {
     public function index(Request $request)
     {
-        $paintings = Painting::where('status', 'on review')->filter($request->query())->oldest()->paginate(8);
+        if ($request->query('status') == 'display') {
+            $paintings = Painting::where('status', 'on display')->filter($request->query())->latest('updated_at')->paginate(8);
+        } else {
+            $paintings = Painting::where('status', 'on review')->filter($request->query())->oldest('updated_at')->paginate(8);
+        }
+
+        $paintings->appends(
+            [
+                'status' => $request->query('status') ?? null,
+            ]);
 
         return view('dashboard.kurator.index', [
             "title" => "Dashboard Kurator",

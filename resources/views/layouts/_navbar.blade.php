@@ -64,7 +64,7 @@
                                     <i class="fas fa-user fa-fw"></i>&nbsp;Dashboard Pelukis
                                 </a>
                             @elseif (auth()->user()->role == "kurator")
-                                <a href="{{ route('dashboard.kurator.paintings')}}"
+                                <a href="{{ route('dashboard.kurator.paintings') }}"
                                     class="block px-4 py-2 text-sm hover:text-black"
                                     role="menuitem">
                                     <i class="fas fa-user fa-fw"></i>&nbsp;Dashboard Kurator
