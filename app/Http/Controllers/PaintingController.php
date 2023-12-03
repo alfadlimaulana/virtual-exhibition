@@ -119,10 +119,7 @@ class PaintingController extends Controller
                 $images[] = $dir_image;
             }
         }
-
-        if($request->file('images') || $painting->status == 'rejected'){
-            $validated['status'] = 'on review';
-        }
+        $validated['status'] = 'on review';
         
         $painting->update($validated);
         foreach ($images as $image) {
