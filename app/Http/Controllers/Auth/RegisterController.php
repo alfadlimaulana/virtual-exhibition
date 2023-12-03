@@ -14,8 +14,10 @@ class RegisterController extends Controller
 {
     public function create(Request $request)
     {
+        $provinces = User::getProvinceOptions();
         return view('auth.register', [
             "title" => "Register",
+            "provinces" => $provinces,
         ]);
     }
 

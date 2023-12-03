@@ -26,6 +26,19 @@
                         <x-forms.error>{{ $message }}</x-forms.error>
                     @enderror
                 </div>
+
+                <div class="mb-3">
+                    <x-forms.label for="province">Provinsi</x-forms.label>
+                    <x-forms.select id="province" name="province" :value="old('province')" required>
+                        <option value="" disabled selected>Pilih Provinsi</option>
+                        @foreach ($provinces as $province)
+                            <option value="{{ $province }}">{{ $province }}</option>
+                        @endforeach
+                    </x-forms.select>
+                    @error('province')
+                        <x-forms.error>{{ $message }}</x-forms.error>
+                    @enderror
+                </div>
             
                 <!-- Email Address -->
                 <div class="mb-3">

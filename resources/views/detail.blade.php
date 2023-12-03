@@ -66,11 +66,15 @@
                             </dd>
                         </div>
                     </dl>
-                    <p>Contact person:</p>
+                    <p class="mb-0.5">Contact person:</p>
                     <dl>
-                        <div class="flex gap-1.5 items-center">
-                            <dt class="text-sm text-gray-600"><i class="ph-fill ph-phone text-xl"></i></dt>
-                            <dd>{{ auth()->user()->phone }}</dd>
+                        <div class="mb-0.5">
+                            <dt class="sr-only">Location</dt>
+                            <dd class="flex items-center gap-1.5"><i class="ph-fill ph-map-pin text-xl"></i> {{ $painting->user->province }}</dd>
+                        </div>
+                        <div>
+                            <dt class="sr-only">Phone</dt>
+                            <dd class="flex items-center gap-1.5"><i class="ph-fill ph-phone text-xl"></i> {{ $painting->user->phone }}</dd>
                         </div>
                     </dl>
                 </div>

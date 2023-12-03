@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Painting;
 use App\Traits\FileTrait;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class PaintingController extends Controller
      */
     public function index(Request $request)
     {
-        $paintings = Painting::with(['paintingImages', 'user'])->filter($request->query())->paginate(9);
+        $paintings = Painting::with(['paintingImages', 'user'])->where('status', 'on display')->filter($request->query())->paginate(9);
         $paintings->appends([
             'keyword' => $request->query('keyword') ?? null,
             'liked' => $request->query('liked') ?? null,
@@ -29,6 +30,7 @@ class PaintingController extends Controller
         return view('home.index', [
             "title" => "Home",
             "paintings" => $paintings,
+            "provinces" => User::getProvinceOptions(),
         ]);
     }
 

@@ -47,6 +47,12 @@ class Painting extends Model
         $query->when($request['material'] ?? false, function ($query, $material) {
             return $query->whereIn('material', $material);
         });
+
+        $query->when($request['province'] ?? false, function ($query, $province) {
+            return $query->whereHas('user', function ($query) use ($province) {
+                $query->whereIn('province', $province);
+            });
+        });
     }
 
     // relations

@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             ])
             ->has(Payment::factory()->paid())
             ->has(Subscription::factory()->active())
-            ->has(Painting::factory()->count(5)
+            ->has(Painting::factory()->count(12)
                     ->has(PaintingImage::factory()->count(3)->sequence(
                         ['image' => 'img/painting-images/1.jpg'],
                         ['image' => 'img/painting-images/2.jpg'],
@@ -55,7 +55,7 @@ class UserSeeder extends Seeder
                 ['name' => 'Pelukis 1'],
                 ['name' => 'Pelukis 2']
             )
-            ->has(Painting::factory()->count(5)
+            ->has(Painting::factory()->count(12)
                     ->has(PaintingImage::factory()->count(3)
                     ->sequence(
                         ['image' => 'img/painting-images/1.jpg'],

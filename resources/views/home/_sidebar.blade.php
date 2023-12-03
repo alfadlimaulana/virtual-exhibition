@@ -1,4 +1,4 @@
-<aside class="p-6 bg-gray-400 sm:rounded-md lg:w-1/3 xl:w-full xl:max-w-sm lg:h-fit lg:sticky top-24">
+<aside class="p-6 bg-gray-100 border border-gray-500 sm:rounded-md lg:w-1/3 xl:w-full xl:max-w-sm lg:h-fit lg:sticky top-24">
     <form action="{{ route('home') }}">
         <div class="mb-4 lg:mb-6">
             <x-forms.label for="keyword">Cari Lukisan</x-forms.label>
@@ -9,6 +9,17 @@
                     </svg>
                 </div>
                 <input type="text" value="{{ request('keyword') }}" name="keyword" id="keyword" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search">
+            </div>
+        </div>
+        <div class="mb-4 lg:mb-6">
+            <x-forms.label for="keyword">Provinsi</x-forms.label>
+            <div class="relative">
+                <x-forms.select value="{{ request('keyword') }}" name="province[]" id="province" multiple class="h-16 mb-1">
+                    @foreach ($provinces as $province)
+                        <option value="{{ $province }}" {{ in_array($province, (request('province') ?? [])) ? 'selected' : '' }}>{{ $province }}</option>   
+                    @endforeach
+                </x-forms.select>
+                <span class="text-sm">*Tahan ctrl untuk memilih lebih dari 1 provinsi</span>
             </div>
         </div>
         @auth
@@ -83,6 +94,9 @@
                 </div>
             </div>
         </div>
-        <x-button type="submit" class="h-full px-6 tracking-normal text-white capitalize bg-gray-500 rounded-l-none hover:bg-gray-600">Search</x-button>
+        <div class="flex gap-1.5">
+            <x-button-a href="{{ route('home')}} " class="w-full px-6 tracking-normal capitalize border border-black hover:bg-gray-400 text-black">Reset</x-button-a>
+            <x-button type="submit" class="w-full px-6 tracking-normal text-white capitalize bg-gray-500 hover:bg-gray-600">Search</x-button>
+        </div>
     </form>
 </aside>
