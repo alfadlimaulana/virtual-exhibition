@@ -7,15 +7,15 @@
             <h3 class="w-full max-xl:mb-8 max-xl:text-center whitespace-nowrap">Dashboard Kurator</h1>
             <div class="w-full gap-3 md:flex">
                 <div x-data="dropdown()">
-                    <x-button @click="toggleDropdown()" id="dropdownActionButton" data-dropdown-toggle="dropdownAction" class="text-white bg-gray-500 hover:bg-gray-600 border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gray-200" type="button">
+                    <x-button @click="toggleDropdown()" id="dropdownActionButton" data-dropdown-toggle="dropdownAction" class="text-white bg-gray-500 border border-gray-300 whitespace-nowrap hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-200" type="button">
                         <span class="sr-only">Action button</span>
-                        Action
+                        {{ request()->has('status') ? 'On Display' : "On Review" }}
                         <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                         </svg>
                     </x-button>
                     <!-- Dropdown menu -->
-                    <div x-show="show" @click.outside="closeDropdown()" id="dropdownAction" class="absolute z-10 bg-gray-200 divide-y divide-gray-100 rounded-lg shadow w-44 mt-2">
+                    <div x-show="show" @click.outside="closeDropdown()" id="dropdownAction" class="absolute z-10 mt-2 bg-gray-200 divide-y divide-gray-100 rounded-lg shadow w-44">
                         <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownActionButton">
                             <li>
                                 <a href="{{ route('dashboard.kurator.paintings') }}" class="block px-4 py-2 hover:bg-gray-100">On Review</a>
@@ -26,7 +26,7 @@
                         </ul>
                     </div>
                 </div>
-                <form action="{{ route('dashboard.paintings') }}" class="w-full">
+                <form action="{{ route('dashboard.kurator.paintings') }}" class="w-full">
                     <div class="relative">
                         <input type="text" value="{{ request('keyword') }}" name="keyword" id="keyword" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search">
                         <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-gray-500 rounded-e-lg border border-gray-700 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-blue-300">

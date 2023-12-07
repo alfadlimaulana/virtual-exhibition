@@ -20,6 +20,7 @@ class PaintingController extends Controller
         $paintings->appends(
             [
                 'status' => $request->query('status') ?? null,
+                'keyword' => $request->query('keyword') ?? null,
             ]);
 
         return view('dashboard.kurator.index', [

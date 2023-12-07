@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="flex-grow grid place-items-center" x-data="modals()">
-    <section class="py-10 w-full" >
+<main class="grid flex-grow place-items-center" x-data="modals()">
+    <section class="w-full py-10" >
         <div x-data="carousel()" class="container gap-8 xl:flex">
             <div id="carousel" class="relative xl:w-2/5 max-xl:mb-4 align-self-stretch" data-images={{ $painting->paintingImages->pluck('image')->map(function($image) {return asset($image);}) }}>
                 <img @click="openImage(selected)" :src="images[selected]" alt="{{ $painting->title }}"
@@ -19,12 +19,12 @@
                     </template>
                 </div>
             </div>
-            <div class="xl:w-3/5 border p-8 border-black rounded-md">
+            <div class="p-8 border border-black rounded-md xl:w-3/5">
                 <div class="w-full mx-auto">
                     <h4 class="mb-6 text-center">Detail Lukisan</h4>
-                    <div class="mb-3 md:flex gap-3">
+                    <div class="gap-3 mb-3 md:flex">
                         <!-- Judul -->
-                        <div class="max-md:mb-3 w-full">
+                        <div class="w-full max-md:mb-3">
                             <x-forms.label for="title">Judul</x-forms.label>
                             <x-forms.input id="title" name="title" value="{{ $painting->title }}" disabled maxlength="32"/>
                             @error('title')
@@ -87,8 +87,8 @@
                     </div>
                 
                     <!-- Dimensi -->
-                    <div class="mb-8 flex items-center gap-3">
-                        <div class="max-md:mb-3 w-full">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-full max-md:mb-3">
                             <x-forms.label for="height">Panjang (cm)</x-forms.label>
                             <x-forms.input type="number" id="height" name="height" value="{{ explode(' X ', $painting->dimension)[0] }}" disabled min="1" max="999"/>
                             @error('height')
@@ -105,7 +105,8 @@
                         </div>
                     </div>
 
-                    <div class="flex gap-3 justify-end">
+                    @if($painting->status == 'on review')
+                    <div class="flex justify-end gap-3">
                         <x-button @click="showModal()" class="px-8 !text-base border border-gray-500 hover:bg-gray-100">
                             Tolak
                         </x-button>
@@ -113,6 +114,7 @@
                             Setujui
                         </x-button-a>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -126,7 +128,7 @@
                         <h3 class="text-lg font-semibold text-gray-900">
                             Beri Umpan Balik
                         </h3>
-                        <button @click="hideModal()" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="crud-modal">
+                        <button @click="hideModal()" type="button" class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto" data-modal-toggle="crud-modal">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                             </svg>
@@ -143,7 +145,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <x-button type="submit" class="ml-auto bg-gray-500 hover:bg-gray-600 text-white">
+                        <x-button type="submit" class="ml-auto text-white bg-gray-500 hover:bg-gray-600">
                             Kirimkan
                         </x-button>
                     </form>
