@@ -15,7 +15,7 @@ class LoginController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -33,7 +33,7 @@ class LoginController extends Controller
         ])->onlyInput('email');
     }
 
-    public function destroy(Request $request)
+    public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="flex-grow grid place-items-center">
+<main class="grid flex-grow place-items-center">
     <section class="py-10" x-data="carousel()">
         <div class="container gap-8 lg:flex">
             <div id="carousel" class="relative lg:w-1/3 max-lg:mb-4" data-images={{ $painting->paintingImages->pluck('image')->map(function($image) {return asset($image);}) }}>
@@ -70,21 +70,21 @@
                     <dl>
                         <div class="mb-0.5">
                             <dt class="sr-only">Location</dt>
-                            <dd class="flex items-center gap-1.5"><i class="ph-fill ph-map-pin text-xl"></i> {{ $painting->user->province }}</dd>
+                            <dd class="flex items-center gap-1.5"><i class="text-xl ph-fill ph-map-pin"></i> {{ $painting->user->province }}</dd>
                         </div>
                         <div>
                             <dt class="sr-only">Phone</dt>
-                            <dd class="flex items-center gap-1.5"><i class="ph-fill ph-phone text-xl"></i> {{ $painting->user->phone }}</dd>
+                            <dd class="flex items-center gap-1.5"><i class="text-xl ph-fill ph-phone"></i> {{ $painting->user->phone }}</dd>
                         </div>
                     </dl>
                 </div>
             </div>
         </div>
+        @foreach ($painting->paintingImages as $paintingImage)
+            <a data-fslightbox="paintings" href="{{ asset($paintingImage->image) }}"></a>
+        @endforeach
     </section>
 
-    @foreach ($painting->paintingImages as $paintingImage)
-        <a data-fslightbox="paintings" href="{{ asset($paintingImage->image) }}"></a>
-    @endforeach
 </main>
 @endsection
 

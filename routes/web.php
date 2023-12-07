@@ -26,7 +26,7 @@ Route::get('/expired', [PageController::class, 'expired'])->name('expired');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
-    Route::post('/login', [LoginController::class, 'store']);
+    Route::post('/login', [LoginController::class, 'login']);
     Route::get('/register', [RegisterController::class, 'create'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);
 });
@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout', [PaymentController::class, 'store'])->name('checkout');
     Route::post('/like/{id}', [LikedPaintingController::class, 'store'])->name('like');
     Route::post('/unlike/{id}', [LikedPaintingController::class, 'destroy'])->name('unlike');
-    Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::prefix('dashboard')->name('dashboard.')->group(function() {
         Route::middleware('role:pelukis')->group(function() {
