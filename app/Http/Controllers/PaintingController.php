@@ -147,6 +147,10 @@ class PaintingController extends Controller
     public function userPaintings(Request $request)
     {
         $paintings = Painting::where('user_id', auth()->user()->id)->withCount('likedPaintings')->filter($request->query())->latest()->paginate(8);
+        $paintings->appends(
+        [
+            'keyword' => $request->query('keyword') ?? null,
+        ]);
 
         return view('dashboard.index', [
             "title" => "Dashboard",
