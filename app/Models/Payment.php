@@ -20,7 +20,7 @@ class Payment extends Model
     ];
 
     // custom method
-    public function getMidtransSnapToken($payment) {
+    public static function getMidtransSnapToken($payment) {
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = config('midtrans.server_key');
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
