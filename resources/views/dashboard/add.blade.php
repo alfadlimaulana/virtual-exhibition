@@ -31,7 +31,7 @@
                 <!-- Deskripsi -->
                 <div class="mb-3">
                     <x-forms.label for="description">Deskripsi</x-forms.label>
-                    <x-forms.textarea rows="3" id="description" name="description" :value="old('description')" required></x-forms.textarea>                    
+                    <x-forms.textarea rows="3" id="description" name="description" :value="old('description')" required>{{ old('description') }}</x-forms.textarea>                    
                     @error('description')
                         <x-forms.error>{{ $message }}</x-forms.error>
                     @enderror
@@ -42,12 +42,12 @@
                     <x-forms.label for="material">Material</x-forms.label>
                     <x-forms.select id="material" name="material" :value="old('material')" required>
                         <option selected disabled>Pilih Material</option>
-                        <option value="acrylic">acrylic</option>
-                        <option value="oil">oil</option>
-                        <option value="watercolor">watercolor</option>
-                        <option value="gouache">gouache</option>
-                        <option value="encaustic">encaustic</option>
-                        <option value="other">other</option>
+                        <option value="acrylic" {{ old('material') == 'acrylic' ? 'selected' : '' }}>acrylic</option>
+                        <option value="oil" {{ old('material') == 'oil' ? 'selected' : '' }}>oil</option>
+                        <option value="watercolor" {{ old('material') == 'watercolor' ? 'selected' : '' }}>watercolor</option>
+                        <option value="gouache" {{ old('material') == 'gouache' ? 'selected' : '' }}>gouache</option>
+                        <option value="encaustic" {{ old('material') == 'encaustic' ? 'selected' : '' }}>encaustic</option>
+                        <option value="other" {{ old('material') == 'other' ? 'selected' : '' }}>other</option>
                     </x-forms.select>
                     @error('material')
                         <x-forms.error>{{ $message }}</x-forms.error>
@@ -59,14 +59,14 @@
                     <x-forms.label for="category">Kategori</x-forms.label>
                     <x-forms.select id="category" name="category" :value="old('category')" required>
                         <option selected disabled>Pilih category</option>
-                        <option value="realism">realism</option>
-                        <option value="photorealism">photorealism</option>
-                        <option value="expressionism">expressionism</option>
-                        <option value="impressionism">impressionism</option>
-                        <option value="abstract">abstract</option>
-                        <option value="surrealism">surrealism</option>
-                        <option value="pop art">pop art</option>
-                        <option value="other">other</option>
+                        <option value="realism" {{ old('category') == 'realism' ? 'selected' : '' }}>realism</option>
+                        <option value="photorealism" {{ old('category') == 'photorealism' ? 'selected' : '' }}>photorealism</option>
+                        <option value="expressionism" {{ old('category') == 'expressionism' ? 'selected' : '' }}>expressionism</option>
+                        <option value="impressionism" {{ old('category') == 'impressionism' ? 'selected' : '' }}>impressionism</option>
+                        <option value="abstract" {{ old('category') == 'abstract' ? 'selected' : '' }}>abstract</option>
+                        <option value="surrealism" {{ old('category') == 'surrealism' ? 'selected' : '' }}>surrealism</option>
+                        <option value="pop art" {{ old('category') == 'pop art' ? 'selected' : '' }}>pop art</option>
+                        <option value="other" {{ old('category') == 'other' ? 'selected' : '' }}>other</option>
                     </x-forms.select>
                     @error('category')
                         <x-forms.error>{{ $message }}</x-forms.error>
@@ -95,10 +95,12 @@
                 <div class="mb-8">
                     <x-forms.label for="images">Gambar</x-forms.label>
                     <x-forms.input type="file" id="images" name="images[]" :value="old('images')" required multiple/>
-                    @error('images')
-                        <x-forms.error>{{ $message }}</x-forms.error>
+                    @if($errors->has('images'))
+                        <x-forms.error>{{ $errors->first('images') }}</x-forms.error>
+                    @elseif($errors->has('images.*'))
+                        <x-forms.error>{{ $errors->first('images.*') }}</x-forms.error>
                     @else
-                        <p class="text-sm mt-1">* Maksimal 3 foto di bawah 3 Mb dengan format jpg, jpeg, atau png..</p>
+                        <p class="text-sm mt-1">* Maksimal 3 foto di bawah 2 Mb dengan format jpg, jpeg, atau png..</p>
                     @enderror
                 </div>
                 

@@ -23,7 +23,7 @@ class UpdatePaintingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:32',
+            'title' => 'required|string|max:32|unique:paintings',
             'year' => 'required|date_format:Y',
             'description' => 'required|string',
             'material' => 'required|string',

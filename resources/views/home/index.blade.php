@@ -17,7 +17,7 @@
                     @foreach ($paintings as $painting)
                     <div class="border border-gray-900 rounded-md">
                         <a href="{{ route('detail', $painting->id) }}">
-                            <img src="{{ asset($painting->paintingImages[1]->image) }}" alt="" class="object-cover object-center w-full aspect-square">
+                            <img src="{{ asset($painting->paintingImages[0]->image) }}" alt="" class="object-cover object-center w-full aspect-square">
                         </a>
                         <div class="p-4 capitalize">
                             <a href="{{ route('detail', $painting->id) }}" class="text-xl font-bold">{{ $painting->title }}</a>
