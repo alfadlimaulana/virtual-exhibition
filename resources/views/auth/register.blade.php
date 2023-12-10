@@ -32,7 +32,7 @@
                     <x-forms.select id="province" name="province" :value="old('province')" required>
                         <option value="" disabled selected>Pilih Provinsi</option>
                         @foreach ($provinces as $province)
-                            <option value="{{ $province }}">{{ $province }}</option>
+                            <option value="{{ $province }}" {{ old('province') == $province? 'selected' : '' }}>{{ $province }}</option>
                         @endforeach
                     </x-forms.select>
                     @error('province')
