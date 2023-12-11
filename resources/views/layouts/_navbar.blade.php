@@ -37,7 +37,7 @@
                     <div class="flex flex-row gap-2">
                         @guest
                         <x-button-a href="{{ route('login') }}"
-                            class="invisible px-6 tracking-normal text-white capitalize transition-colors duration-200 transform !rounded-full bg-gray-500 border-white hover:bg-gray-600 md:visible">
+                            class="invisible px-6 tracking-normal text-white capitalize transition-colors duration-200 transform !rounded-full bg-gray-500 border-white hover:bg-gray-600 sm:visible">
                             <span class="mx-1">Login</span>
                         </x-button-a>
                         @else
@@ -92,21 +92,13 @@
     <div class="absolute z-10 w-full p-1 sm:hidden" id="mobile-menu" x-show="showMobileNav"
         @click.away="showMobileNav = false" x-transition>
         <div class="px-2 pt-2 pb-3 space-y-1 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
-            <a href=""
+            <a href="{{ route('home') }}"
                 class="block px-3 py-2 text-base font-medium text-gray-500 rounded-md">
-                Paket
+                Beranda
             </a>
-            <a href=""
+            <a href="{{ route('pricing')}}"
                 class="block px-3 py-2 text-base font-medium text-gray-500 rounded-md">
-                Portfolio
-            </a>
-            <a href=""
-                class="block px-3 py-2 text-base font-medium text-gray-500 rounded-md">
-                Tema
-            </a>
-            <a href=""
-                class="block px-3 py-2 text-base font-medium text-gray-500 rounded-md">
-                Fitur
+                Pricing
             </a>
     
             @guest
