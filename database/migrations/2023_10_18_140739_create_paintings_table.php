@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('paintings', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->year('year')->nullable();
-            $table->string('title');
+            $table->string('title')->unique();
             $table->text('description');
             $table->string('material');
             $table->string('category');

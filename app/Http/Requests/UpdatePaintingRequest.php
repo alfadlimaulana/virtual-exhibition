@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePaintingRequest extends FormRequest
@@ -23,7 +24,12 @@ class UpdatePaintingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:32|unique:paintings',
+            'title' => [
+                'required',
+                'string',
+                'max:32',
+                Rule::unique('paintings')->ignore($this->route('painting')),
+            ],
             'year' => 'required|date_format:Y',
             'description' => 'required|string',
             'material' => 'required|string',
