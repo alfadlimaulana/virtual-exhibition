@@ -29,7 +29,7 @@
                 {{ $paintings->links() }}
             </div>
             @else
-                <div class="text-xl text-gray-500 h-full grid place-items-center">No paintings found</div>
+                <div class="flex items-center justify-center h-full text-xl text-gray-500">No paintings found</div>
             @endif
         </section>
     </div>

@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="flex-grow grid place-items-center p-8">
-    <div class="flex items-center w-full max-w-5xl p-8 md:border border-black rounded-md">
+<main class="flex items-center justify-center flex-grow p-8">
+    <div class="flex items-center w-full max-w-5xl p-8 border-black rounded-md md:border">
         <div class="w-full max-w-xl mx-auto">
-            <h4 class="mb-6  text-center">Tambah Lukisan</h4>
+            <h4 class="mb-6 text-center">Tambah Lukisan</h4>
             
             <form method="POST" action="{{ route('dashboard.paintings.store') }}" class="mb-3" enctype="multipart/form-data">
                 @csrf
             
-                <div class="mb-3 md:flex gap-3">
+                <div class="gap-3 mb-3 md:flex">
                     <!-- Judul -->
-                    <div class="max-md:mb-3 w-full">
+                    <div class="w-full max-md:mb-3">
                         <x-forms.label for="title">Judul</x-forms.label>
                         <x-forms.input id="title" name="title" :value="old('title')" required maxlength="32"/>
                         @error('title')
@@ -74,8 +74,8 @@
                 </div>
             
                 <!-- Dimensi -->
-                <div class="mb-3 flex items-center gap-3">
-                    <div class="max-md:mb-3 w-full">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-full max-md:mb-3">
                         <x-forms.label for="height">Panjang (cm)</x-forms.label>
                         <x-forms.input type="number" id="height" name="height" :value="old('height')" required min="1" max="999"/>
                         @error('height')
@@ -100,7 +100,7 @@
                     @elseif($errors->has('images.*'))
                         <x-forms.error>{{ $errors->first('images.*') }}</x-forms.error>
                     @else
-                        <p class="text-sm mt-1">* Maksimal 3 foto di bawah 2 Mb dengan format jpg, jpeg, atau png..</p>
+                        <p class="mt-1 text-sm">* Maksimal 3 foto di bawah 2 Mb dengan format jpg, jpeg, atau png..</p>
                     @enderror
                 </div>
                 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="flex-grow grid place-items-center">
+<main class="flex items-center justify-center flex-grow">
     <section class="py-10">
         <div class="container text-center">
             <h1 class="mb-8">Maaf, Masa Berlangganan Anda Habis</h1>
