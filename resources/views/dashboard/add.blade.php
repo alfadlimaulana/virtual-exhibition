@@ -21,7 +21,7 @@
                     <!-- Tahun -->
                     <div>
                         <x-forms.label for="year">Tahun</x-forms.label>
-                        <x-forms.input id="year" name="year" :value="old('year')" required pattern="\d{4}"/>
+                        <x-forms.input type="number" id="year" name="year" :value="old('year')" required min="1700" max="{{ now()->year }}"/>
                         @error('year')
                             <x-forms.error>{{ $message }}</x-forms.error>
                         @enderror

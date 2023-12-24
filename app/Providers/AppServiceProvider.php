@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,11 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::directive('dateID', function ( $expression ) { 
             return "<?php echo \Carbon\Carbon::parse(" . $expression . ")->locale('id')->isoFormat('dddd, D MMMM Y'); ?>";
+        });
+
+        Validator::extend('max_year', function ($attribute, $value, $parameters, $validator) {
+            $currentYear = now()->year;
+            return $value <= $currentYear;
         });
     }
 }

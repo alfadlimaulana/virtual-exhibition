@@ -34,7 +34,7 @@
                         <!-- Tahun -->
                         <div>
                             <x-forms.label for="year">Tahun</x-forms.label>
-                            <x-forms.input id="year" name="year" value="{{ $painting->year }}" disabled pattern="\d{4}"/>
+                            <x-forms.input id="year" name="year" value="{{ $painting->year }}" disabled pattern="\d{4}" max={{ Carbon::now()->year }}/>
                             @error('year')
                                 <x-forms.error>{{ $message }}</x-forms.error>
                             @enderror
@@ -139,7 +139,7 @@
                         <div class="mb-4">
                             <div>
                                 <x-forms.label for="message">Pesan</x-forms.label>
-                                <x-forms.textarea rows="3" id="message" name="message" value=""></x-forms.textarea>                    
+                                <x-forms.textarea rows="3" id="message" name="message" value="" required></x-forms.textarea>                    
                                 @error('message')
                                     <x-forms.error>{{ $message }}</x-forms.error>
                                 @enderror
