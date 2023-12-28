@@ -15,7 +15,7 @@ use App\Http\Requests\UpdatePaintingRequest;
 class PaintingController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan lukisan di halaman beranda.
      */
     public function index(Request $request)
     {
@@ -35,7 +35,7 @@ class PaintingController extends Controller
     }
 
     /**
-     * Show the  form for creating a new resource.
+     * Menampilkan form untuk menambahkan lukisan
      */
     public function create()
     {
@@ -45,7 +45,7 @@ class PaintingController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menyimpan data lukisan yang baru ditambahkan
      */
     public function store(StorePaintingRequest $request)
     {
@@ -74,7 +74,7 @@ class PaintingController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Menampilkan informasi detil suatu lukisan
      */
     public function show(Painting $painting)
     {
@@ -90,7 +90,7 @@ class PaintingController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Menampilkan form untuk mengubah data lukisan
      */
     public function edit(Painting $painting)
     {
@@ -101,7 +101,7 @@ class PaintingController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Menyimpan data lukisan yang diperbaharui
      */
     public function update(UpdatePaintingRequest $request, Painting $painting)
     {
@@ -135,7 +135,7 @@ class PaintingController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus lukisan tertentu
      */
     public function destroy(Painting $painting)
     {
@@ -144,6 +144,9 @@ class PaintingController extends Controller
         return redirect()->route('dashboard.paintings')->with('success', 'Lukisan berhasil dihapus');
     }
 
+    /**
+     * Mengampilkan daftar lukisan milik pengguna yang terautentikasi
+     */
     public function userPaintings(Request $request)
     {
         $paintings = Painting::where('user_id', auth()->user()->id)->withCount('likedPaintings')->filter($request->query())->latest()->paginate(8);

@@ -15,7 +15,7 @@
             <div class="max-sm:container">
                 <div class="grid gap-4 sm:grid-cols-2 md:max-lg:grid-cols-3 xl:grid-cols-3">
                     @foreach ($paintings as $painting)
-                    <div class="border border-gray-900 rounded-md">
+                    <div class="border border-gray-900 rounded-md shadow-md bg-brand-blue-500">
                         <a href="{{ route('detail', $painting->id) }}">
                             <img src="{{ asset($painting->paintingImages[0]->image) }}" alt="" class="object-cover object-center w-full aspect-square">
                         </a>

@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 
 class PaintingController extends Controller
 {
+    /**
+     * Mengampilkan daftar lukisan yang perlu ditinjau
+     */
     public function index(Request $request)
     {
         if ($request->query('status') == 'display') {
@@ -29,6 +32,9 @@ class PaintingController extends Controller
         ]);
     }
 
+    /**
+     * Mengampilkan detil lukisan
+     */
     public function show(Painting $painting)
     {
         return view('dashboard.kurator.detail', [
@@ -37,12 +43,18 @@ class PaintingController extends Controller
         ]);
     }
 
+    /**
+     * Menyetujui lukisan untuk ditampilkan
+     */
     public function approve(Painting $painting)
     {
         $painting->update(["status"=> "on display"]);
         return redirect()->route('dashboard.kurator.paintings')->with('success', 'Lukisan telah disetujui');
     }
 
+    /**
+     * Menolak lukisan untuk ditampilkan
+     */
     public function reject(Request $request, Painting $painting)
     {
         $painting->update(["status" => "rejected"]);

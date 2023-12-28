@@ -14,7 +14,7 @@
         <div class="container gap-8 lg:flex">
             <div class="w-full max-lg:mb-6">
                 <img src="{{asset('img/bg/header.jpg')}}" alt="art exhibition"
-                    class="object-cover w-full aspect-square object-fit">
+                    class="object-cover w-full aspect-square object-fit rounded-lg shadow-lg">
             </div>
             <div class="flex w-full items-center">
                 <div>
@@ -62,7 +62,7 @@
                             </tr>
                         </table>
                     </div>
-                    <x-button id="pay-button" class="max-md:w-full py-2.5 bg-gray-500 text-white !text-base">Bayar Sekarang</x-button>
+                    <x-button id="pay-button" class="max-md:w-full py-2.5 bg-brand-yellow-500 text-black hover:bg-brand-yellow-600 shadow-md !text-base">Bayar Sekarang</x-button>
                 </div>
             </div>
         </div>

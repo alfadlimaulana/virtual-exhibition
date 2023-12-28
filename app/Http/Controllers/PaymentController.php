@@ -6,20 +6,11 @@ use Carbon\Carbon;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Subscription;
 
 class PaymentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
+     * Menampilkan halaman pricing
      */
     public function create()
     {
@@ -29,7 +20,7 @@ class PaymentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Membuat pesanan baru dan membuat token Midtrans
      */
     public function store(Request $request)
     {
@@ -52,30 +43,14 @@ class PaymentController extends Controller
             DB::commit();
 
             return view('order.checkout', compact('title', 'snapToken', 'payment'));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with("error", "Order failed");
         }
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Memperbaharui status pembayaran dan masa berlangganan
      */
     public function update(Request $request, Payment $payment)
     {
@@ -100,16 +75,8 @@ class PaymentController extends Controller
                     ]);
                 }
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->back()->with("error", "failed");
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Payment $payment)
-    {
-        //
     }
 }

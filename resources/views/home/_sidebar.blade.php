@@ -1,4 +1,4 @@
-<aside class="p-6 bg-gray-100 border border-gray-500 sm:rounded-md lg:w-1/3 xl:w-full xl:max-w-sm lg:h-fit lg:sticky top-24">
+<aside class="p-6 border-gray-500 shadow-md bg-brand-yellow-500 sm:border sm:rounded-md lg:w-1/3 xl:w-full xl:max-w-sm lg:h-fit lg:sticky top-24">
     <form action="{{ route('home') }}">
         <div class="mb-4 lg:mb-6">
             <x-forms.label for="keyword">Cari Lukisan</x-forms.label>
@@ -95,8 +95,8 @@
             </div>
         </div>
         <div class="flex gap-1.5">
-            <x-button-a href="{{ route('home')}} " class="w-full px-6 tracking-normal capitalize border border-black hover:bg-gray-400 text-black">Reset</x-button-a>
-            <x-button type="submit" class="w-full px-6 tracking-normal text-white capitalize bg-gray-500 hover:bg-gray-600">Search</x-button>
+            <x-button-a href="{{ route('home')}} " class="w-full px-6 tracking-normal text-black capitalize border border-brand-gray hover:bg-gray-400">Reset</x-button-a>
+            <x-button type="submit" class="w-full px-6 tracking-normal text-black capitalize bg-white border hover:bg-brand-cream border-brand-gray">Search</x-button>
         </div>
     </form>
 </aside>

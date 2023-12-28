@@ -6,7 +6,7 @@
         <div class="container gap-8 lg:flex">
             <div class="w-full max-lg:mb-6">
                 <img src="{{asset('img/bg/header.jpg')}}" alt="art exhibition"
-                    class="object-cover w-full aspect-square object-fit">
+                    class="object-cover w-full aspect-square object-fit rounded-lg shadow-lg">
             </div>
             <div class="grid w-full place-items-center">
                 <div>
@@ -38,7 +38,7 @@
                                 <td class="px-2 py-1" x-text="setTotal(duration)"></td>
                             </tr>
                         </table>
-                        <x-button type="submit" class="max-md:w-full py-2.5 bg-gray-500 text-white">Buat Pesanan</x-button>
+                        <x-button type="submit" class="max-md:w-full py-2.5 bg-brand-yellow-500 hover:bg-brand-yellow-600 text-black shadow-md">Buat Pesanan</x-button>
                     </form>
                 </div>
             </div>

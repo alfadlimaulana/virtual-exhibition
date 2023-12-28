@@ -3,7 +3,7 @@
 @section('content')    
 <!-- Session Status -->
 <main class="flex items-center justify-center flex-grow">
-    <div class="flex items-center w-full max-w-2xl p-8 border-black rounded-md md:border aspect-video">
+    <div class="flex items-center w-full max-w-2xl p-8 bg-brand-cream border-black rounded-lg md:border aspect-video shadow-lg">
         <div class="w-full max-w-xs mx-auto text-center">
             <h4 class="mb-6">Masuk</h4>
             
@@ -22,16 +22,16 @@
                 @csrf
             
                 <div class="flex flex-col gap-2 mb-6">
-                    <x-forms.input id="email" class="mt-1" type="email" name="email" :value="old('email')" placeholder="Email" required />
-                    <x-forms.input id="password" class="max-w-xs" type="password" name="password" placeholder="Password"/>
+                    <x-forms.input id="email" class="mt-1 !border-brand-gray" type="email" name="email" :value="old('email')" placeholder="Email" required />
+                    <x-forms.input id="password" class="max-w-xs !border-brand-gray" type="password" name="password" placeholder="Password"/>
                 </div>
             
-                <x-button type="submit" class="w-full text-white bg-gray-500 hover:bg-gray-600">
+                <x-button type="submit" class="w-full text-black bg-brand-yellow-500 hover:bg-brand-yellow-600">
                     Masuk
                 </x-button>
             </form>
             
-            <p>Belum punya akun? <a href="{{ route('register') }}" class="text-gray-700 underline hover:text-gray-800">Daftar disini.</a></p>
+            <p>Belum punya akun? <a href="{{ route('register') }}" class="text-brand-gray underline hover:text-black">Daftar disini.</a></p>
         </div>
     </div>
 </main>
