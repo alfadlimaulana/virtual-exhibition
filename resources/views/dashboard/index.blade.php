@@ -8,8 +8,8 @@
             <div class="w-full gap-3 md:flex">
                 <form action="{{ route('dashboard.paintings') }}" class="w-full">
                     <div class="relative">
-                        <input type="text" value="{{ request('keyword') }}" name="keyword" id="keyword" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search">
-                        <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-gray-500 rounded-e-lg border border-gray-700 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                        <input type="text" value="{{ request('keyword') }}" name="keyword" id="keyword" class="block w-full p-2 text-sm text-gray-900 border border-brand-gray rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search">
+                        <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-black bg-brand-yellow-500 rounded-e-lg border border-brand-gray hover:bg-brand-yellow-600 focus:ring-4 focus:outline-none focus:ring-blue-300">
                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                             </svg>
@@ -17,7 +17,7 @@
                         </button>
                     </div>
                 </form>
-                <x-button-a href="{{ route('dashboard.paintings.add') }}" class="bg-gray-200 hover:bg-gray-300 whitespace-nowrap max-md:mt-2.5 max-md:ml-auto">Tambah Lukisan</x-button-a>
+                <x-button-a href="{{ route('dashboard.paintings.add') }}" class="bg-brand-yellow-500 hover:bg-brand-yellow-600 border border-brand-gray whitespace-nowrap max-md:mt-2.5 max-md:ml-auto">Tambah Lukisan</x-button-a>
             </div>
         </div>
         <div class="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
@@ -41,14 +41,14 @@
                             <td class="px-3 py-2">{{ \Carbon\Carbon::parse($painting->created_at)->format('d-m-Y') }}</td>
                             <td class="px-3 py-2">{{ $painting->status }}</td>
                             <td class="flex justify-center gap-2 px-3 py-2">
-                                <x-button-a href="{{ route('dashboard.paintings.edit', $painting->id) }}" class="bg-gray-500 !w-8 !h-8 !p-0 rounded-md grid place-items-center">
-                                    <i class="text-white ph ph-pencil-simple"></i>
+                                <x-button-a href="{{ route('dashboard.paintings.edit', $painting->id) }}" class="bg-brand-yellow-500 hover:bg-brand-yellow-600 border border-brand-gray !w-8 !h-8 !p-0 rounded-md grid place-items-center">
+                                    <i class="text-black ph-bold ph-pencil-simple"></i>
                                 </x-button-a>
                                 <form id="deleteForm" action="{{ route('dashboard.paintings.delete', $painting->id)}}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <x-button type="button" @click="showModal()" class="bg-gray-500 !w-8 !h-8 !p-0 rounded-md grid place-items-center">
-                                        <i class="text-white ph ph-trash"></i>
+                                    <x-button type="button" @click="showModal()" class="bg-brand-orange-500 hover:bg-brand-orange-600 border border-brand-gray !w-8 !h-8 !p-0 rounded-md grid place-items-center">
+                                        <i class="text-black ph-bold ph-trash"></i>
                                     </x-button>
                                 </form>
                             </td>
@@ -71,12 +71,12 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                     <div class="p-4 text-center md:p-5">
-                        <svg class="w-12 h-12 mx-auto mb-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <svg class="w-12 h-12 mx-auto mb-4 text-brand-orange-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                         </svg>
                         <h3 class="mb-5 text-lg font-normal text-gray-500">Yakin ingin menghapus lukisan ini?</h3>
                         <div class="flex justify-center gap-2">
-                            <x-button @click="submitForm('deleteForm')" class="text-white bg-gray-500 hover:bg-gray-600 px-5 py-2.5">
+                            <x-button @click="submitForm('deleteForm')" class="text-black bg-brand-orange-500 hover:bg-brand-orange-600 border border-brand-gray px-5 py-2.5">
                                 Ya, Hapus
                             </x-button>
                             <x-button @click="hideModal()" class="border border-gray-500 text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-900 px-5 py-2.5">Batalkan</x-button>

@@ -4,9 +4,9 @@
 <main class="flex-grow">
     <section class="py-10" x-data="carousel()">
         <div class="container gap-8 xl:flex">
-            <div id="carousel" class="relative xl:w-2/5 max-xl:mb-4 align-self-stretch" data-images={{ $painting->paintingImages->pluck('image')->map(function($image) {return asset($image);}) }}>
+            <div id="carousel" class="relative xl:w-2/5 max-xl:mb-4 align-self-stretch shadow-lg" data-images={{ $painting->paintingImages->pluck('image')->map(function($image) {return asset($image);}) }}>
                 <img @click="openImage(selected)" :src="images[selected]" alt="{{ $painting->title }}"
-                        class="object-cover w-full xl:h-full aspect-square md:max-xl:aspect-video">
+                        class="object-cover w-full xl:h-full aspect-square md:max-xl:aspect-video rounded-lg">
                 <button @click="prevImage" class="absolute h-10 p-2 -translate-y-1/2 border border-gray-500 rounded-full cursor-pointer bg-gray-50 bg-opacity-60 left-4 top-1/2 group aspect-square hover:bg-opacity-100">
                     <i class="ph ph-caret-left"></i>
                 </button>
@@ -19,7 +19,7 @@
                     </template>
                 </div>
             </div>
-            <div class="xl:w-3/5 border p-8 border-black rounded-md">
+            <div class="xl:w-3/5 border p-8 border-black rounded-lg shadow-lg bg-brand-cream">
                 <div class="w-full mx-auto">
                     <h4 class="mb-6 text-center">Ubah Lukisan</h4>
                     @if($painting->feedbacks()->exists())
@@ -49,7 +49,7 @@
                             <!-- Judul -->
                             <div class="max-md:mb-3 w-full">
                                 <x-forms.label for="title">Judul</x-forms.label>
-                                <x-forms.input id="title" name="title" value="{{ $painting->title }}" required maxlength="32"/>
+                                <x-forms.input class="!border-brand-gray" id="title" name="title" value="{{ $painting->title }}" required maxlength="32"/>
                                 @error('title')
                                 <x-forms.error>{{ $message }}</x-forms.error>
                                 @enderror
@@ -57,7 +57,7 @@
                             <!-- Tahun -->
                             <div>
                                 <x-forms.label for="year">Tahun</x-forms.label>
-                                <x-forms.input id="year" name="year" value="{{ $painting->year }}" required pattern="\d{4}"/>
+                                <x-forms.input class="!border-brand-gray" type="number" id="year" name="year" value="{{ $painting->year }}" required min="1901" max="{{ now()->year }}"/>
                                 @error('year')
                                     <x-forms.error>{{ $message }}</x-forms.error>
                                 @enderror
@@ -67,7 +67,7 @@
                         <!-- Deskripsi -->
                         <div class="mb-3">
                             <x-forms.label for="description">Deskripsi</x-forms.label>
-                            <x-forms.textarea rows="3" id="description" name="description" value="" required> {{ $painting->description }} </x-forms.textarea>                    
+                            <x-forms.textarea class="!border-brand-gray" rows="3" id="description" name="description" value="" required> {{ $painting->description }} </x-forms.textarea>                    
                             @error('description')
                                 <x-forms.error>{{ $message }}</x-forms.error>
                             @enderror
@@ -76,7 +76,7 @@
                         <!-- Material -->
                         <div class="mb-3">
                             <x-forms.label for="material">Material</x-forms.label>
-                            <x-forms.select id="material" name="material" required>
+                            <x-forms.select class="!border-brand-gray" id="material" name="material" required>
                                 <option disabled>Pilih Material</option>
                                 <option value="acrylic" {{ $painting->material == 'acrylic' ? 'selected' : '' }}>acrylic</option>
                                 <option value="oil" {{ $painting->material == 'oil' ? 'selected' : '' }}>oil</option>
@@ -93,7 +93,7 @@
                         <!-- Category -->
                         <div class="mb-3">
                             <x-forms.label for="category">Kategori</x-forms.label>
-                            <x-forms.select id="category" name="category" :value="old('category')" required>
+                            <x-forms.select class="!border-brand-gray" id="category" name="category" :value="old('category')" required>
                                 <option disabled>Pilih category</option>
                                 <option value="realism" {{ $painting->category == 'realism' ? 'selected' : '' }}>realism</option>
                                 <option value="photorealism" {{ $painting->category == 'photorealism' ? 'selected' : '' }}>photorealism</option>
@@ -113,7 +113,7 @@
                         <div class="mb-3 flex items-center gap-3">
                             <div class="max-md:mb-3 w-full">
                                 <x-forms.label for="height">Panjang (cm)</x-forms.label>
-                                <x-forms.input type="number" id="height" name="height" value="{{ explode(' X ', $painting->dimension)[0] }}" required min="1" max="999"/>
+                                <x-forms.input class="!border-brand-gray" type="number" id="height" name="height" value="{{ explode(' X ', $painting->dimension)[0] }}" required min="1" max="999"/>
                                 @error('height')
                                 <x-forms.error>{{ $message }}</x-forms.error>
                                 @enderror
@@ -121,7 +121,7 @@
                             <div>x</div>
                             <div class="w-full">
                                 <x-forms.label for="width">Lebar (cm)</x-forms.label>
-                                <x-forms.input type="number" id="width" name="width" value="{{ explode(' X ', $painting->dimension)[1] }}" required min="1" max="999"/>
+                                <x-forms.input class="!border-brand-gray" type="number" id="width" name="width" value="{{ explode(' X ', $painting->dimension)[1] }}" required min="1" max="999"/>
                                 @error('width')
                                     <x-forms.error>{{ $message }}</x-forms.error>
                                 @enderror
@@ -130,7 +130,7 @@
         
                         <div class="mb-8">
                             <x-forms.label for="images">Gambar</x-forms.label>
-                            <x-forms.input type="file" id="images" name="images[]" value="" multiple/>
+                            <x-forms.input class="file:bg-brand-yellow-500 file:text-black file:px-3 !border-brand-gray" type="file" id="images" name="images[]" value="" multiple/>
                             @error('images')
                                 <x-forms.error>{{ $message }}</x-forms.error>
                             @enderror
@@ -142,9 +142,14 @@
                             @endif
                         </div>
             
-                        <x-button type="submit" class="w-full ml-auto px-8 !text-base text-white bg-gray-500 hover:bg-gray-600">
-                            Ubah
-                        </x-button>
+                        <div class="flex max-sm:flex-col gap-1.5">
+                            <x-button-a href="{{ route('dashboard.paintings') }}" type="submit" class="max-sm:order-2 w-full ml-auto px-8 !text-base border border-gray-500 hover:bg-gray-100">
+                                Batal
+                            </x-button-a>
+                            <x-button type="submit" class="w-full ml-auto px-8 !text-base text-black bg-brand-yellow-500 hover:bg-brand-yellow-600 border border-brand-gray">
+                                Ubah
+                            </x-button>
+                        </div>
                     </form>
                 </div>
             </div>

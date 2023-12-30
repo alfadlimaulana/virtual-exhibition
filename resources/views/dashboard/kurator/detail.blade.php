@@ -6,7 +6,7 @@
         <div x-data="carousel()" class="container gap-8 xl:flex">
             <div id="carousel" class="relative xl:w-2/5 max-xl:mb-4 align-self-stretch" data-images={{ $painting->paintingImages->pluck('image')->map(function($image) {return asset($image);}) }}>
                 <img @click="openImage(selected)" :src="images[selected]" alt="{{ $painting->title }}"
-                        class="object-cover w-full xl:h-full aspect-square md:max-xl:aspect-video">
+                        class="object-cover w-full xl:h-full aspect-square md:max-xl:aspect-video rounded-lg">
                 <button @click="prevImage" class="absolute h-10 p-2 -translate-y-1/2 border border-gray-500 rounded-full cursor-pointer bg-gray-50 bg-opacity-60 left-4 top-1/2 group aspect-square hover:bg-opacity-100">
                     <i class="ph ph-caret-left"></i>
                 </button>
@@ -19,14 +19,14 @@
                     </template>
                 </div>
             </div>
-            <div class="p-8 border border-black rounded-md xl:w-3/5">
+            <div class="p-8 border border-black bg-brand-cream rounded-md xl:w-3/5">
                 <div class="w-full mx-auto">
                     <h4 class="mb-6 text-center">Detail Lukisan</h4>
                     <div class="gap-3 mb-3 md:flex">
                         <!-- Judul -->
                         <div class="w-full max-md:mb-3">
                             <x-forms.label for="title">Judul</x-forms.label>
-                            <x-forms.input id="title" name="title" value="{{ $painting->title }}" disabled maxlength="32"/>
+                            <x-forms.input class="!border-brand-gray" id="title" name="title" value="{{ $painting->title }}" disabled maxlength="32"/>
                             @error('title')
                             <x-forms.error>{{ $message }}</x-forms.error>
                             @enderror
@@ -34,7 +34,7 @@
                         <!-- Tahun -->
                         <div>
                             <x-forms.label for="year">Tahun</x-forms.label>
-                            <x-forms.input id="year" name="year" value="{{ $painting->year }}" disabled pattern="\d{4}" max={{ Carbon::now()->year }}/>
+                            <x-forms.input class="!border-brand-gray" type="number" id="year" name="year" value="{{ $painting->year }}" disabled required min="1901" max="{{ now()->year }}"/>
                             @error('year')
                                 <x-forms.error>{{ $message }}</x-forms.error>
                             @enderror
@@ -44,7 +44,7 @@
                     <!-- Deskripsi -->
                     <div class="mb-3">
                         <x-forms.label for="description">Deskripsi</x-forms.label>
-                        <x-forms.textarea rows="3" id="description" name="description" value="" disabled> {{ $painting->description }} </x-forms.textarea>                    
+                        <x-forms.textarea class="!border-brand-gray" rows="3" id="description" name="description" value="" disabled> {{ $painting->description }} </x-forms.textarea>                    
                         @error('description')
                             <x-forms.error>{{ $message }}</x-forms.error>
                         @enderror
@@ -53,7 +53,7 @@
                     <!-- Material -->
                     <div class="mb-3">
                         <x-forms.label for="material">Material</x-forms.label>
-                        <x-forms.select id="material" name="material" disabled>
+                        <x-forms.select class="!border-brand-gray" id="material" name="material" disabled>
                             <option disabled>Pilih Material</option>
                             <option value="acrylic" {{ $painting->material == 'acrylic' ? 'selected' : '' }}>acrylic</option>
                             <option value="oil" {{ $painting->material == 'oil' ? 'selected' : '' }}>oil</option>
@@ -70,7 +70,7 @@
                     <!-- Category -->
                     <div class="mb-3">
                         <x-forms.label for="category">Kategori</x-forms.label>
-                        <x-forms.select id="category" name="category" :value="old('category')" disabled>
+                        <x-forms.select class="!border-brand-gray" id="category" name="category" :value="old('category')" disabled>
                             <option disabled>Pilih category</option>
                             <option value="realism" {{ $painting->category == 'realism' ? 'selected' : '' }}>realism</option>
                             <option value="photorealism" {{ $painting->category == 'photorealism' ? 'selected' : '' }}>photorealism</option>
@@ -90,7 +90,7 @@
                     <div class="flex items-center gap-3 mb-8">
                         <div class="w-full max-md:mb-3">
                             <x-forms.label for="height">Panjang (cm)</x-forms.label>
-                            <x-forms.input type="number" id="height" name="height" value="{{ explode(' X ', $painting->dimension)[0] }}" disabled min="1" max="999"/>
+                            <x-forms.input class="!border-brand-gray" type="number" id="height" name="height" value="{{ explode(' X ', $painting->dimension)[0] }}" disabled min="1" max="999"/>
                             @error('height')
                             <x-forms.error>{{ $message }}</x-forms.error>
                             @enderror
@@ -98,7 +98,7 @@
                         <div>x</div>
                         <div class="w-full">
                             <x-forms.label for="width">Lebar (cm)</x-forms.label>
-                            <x-forms.input type="number" id="width" name="width" value="{{ explode(' X ', $painting->dimension)[1] }}" disabled min="1" max="999"/>
+                            <x-forms.input class="!border-brand-gray" type="number" id="width" name="width" value="{{ explode(' X ', $painting->dimension)[1] }}" disabled min="1" max="999"/>
                             @error('width')
                                 <x-forms.error>{{ $message }}</x-forms.error>
                             @enderror

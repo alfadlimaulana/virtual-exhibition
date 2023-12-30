@@ -30,7 +30,7 @@ class UpdatePaintingRequest extends FormRequest
                 'max:32',
                 Rule::unique('paintings')->ignore($this->route('painting')),
             ],
-            'year' => 'required|date_format:Y',
+            'year' => 'required|date_format:Y|max_year|min_year',
             'description' => 'required|string',
             'material' => 'required|string',
             'category' => 'required|string',

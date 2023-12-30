@@ -27,7 +27,7 @@ class StorePaintingRequest extends FormRequest
 
         return [
             'title' => 'required|string|max:32|unique:paintings',
-            'year' => 'required|date_format:Y|max_year',
+            'year' => 'required|date_format:Y|max_year|min_year',
             'description' => 'required|string',
             'material' => 'required|string',
             'category' => 'required|string',

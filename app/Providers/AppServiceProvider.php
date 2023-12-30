@@ -33,5 +33,10 @@ class AppServiceProvider extends ServiceProvider
             $currentYear = now()->year;
             return $value <= $currentYear;
         });
+
+        Validator::extend('min_year', function ($attribute, $value, $parameters, $validator) {
+            $minYear = 1901;
+            return $value >= $minYear;
+        });
     }
 }
